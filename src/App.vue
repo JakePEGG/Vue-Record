@@ -1,24 +1,32 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <SafetyArea></SafetyArea>
+    <FullPrescribingInformation></FullPrescribingInformation>
+    <Expand></Expand>
+    <Logo></Logo>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import SafetyArea from "./components/SafetyArea.vue";
+import FullPrescribingInformation from "./components/FullPrescribingInformation.vue";
+import Expand from "./components/Expand.vue";
+import Logo from "./components/Logo.vue";
 
 export default {
-  name: 'app',
+  name: "IsiTray",
   components: {
-    HelloWorld
+    SafetyArea,
+    FullPrescribingInformation,
+    Expand,
+    Logo
   }
-}
+};
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
