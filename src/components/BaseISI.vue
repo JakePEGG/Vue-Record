@@ -55,10 +55,13 @@
     </div>
     <button class="Full-Prescribing-Information">Full Prescribing Information</button>
 
-    <button v-on:click="expandUp(), hideExpand(), showCollapse()" class="expand">Expand</button>
+    <button
+      v-on:click="expandUp(), hideExpand(), showCollapse(), loopSubheading()"
+      class="expand"
+    >Expand</button>
     <div v-on:click="collapse(), showExpand(), hideCollapse()" class="collapse"></div>
 
-    <div class="c"></div>
+    <div class="subheadings"></div>
   </div>
 </template>
 
@@ -102,6 +105,16 @@ export default {
     hideCollapse() {
       const container = document.querySelector(".collapse");
       container.style = "display: none";
+    },
+
+    loopSubheading() {
+      const subheadings = document.querySelectorAll("h3");
+      subheadings.forEach(item => {
+        item.setAttribute("id", item.innerText);
+        let heading = document.createElement("a");
+        heading.innerHTML = item.innerHTML;
+        document.querySelector(".subheadings").appendChild(heading);
+      });
     }
   }
 };
@@ -123,6 +136,13 @@ export default {
   top: 850px;
   position: absolute;
   transition: top 1s linear;
+}
+
+.subheadings {
+  background: transparent;
+  position: absolute;
+  left: 0px;
+  border: 1px blue solid;
 }
 
 .collapse {
