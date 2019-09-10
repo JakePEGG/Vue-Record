@@ -1,9 +1,6 @@
 <template>
   <div>
     <BaseISI></BaseISI>
-    <FullPrescribingInformation></FullPrescribingInformation>
-    <Expand></Expand>
-    <Logo></Logo>
   </div>
 </template>
 

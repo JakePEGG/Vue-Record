@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main-container">
     <p>
       IMPORTANT SAFETY INFORMATION
       <br />
@@ -80,14 +80,28 @@
     </div>
     <button class="Full-Prescribing-Information">Full Prescribing Information</button>
 
-    <button class="expand">Expand</button>
+    <button v-on:click="expandUp()" class="expand">Expand</button>
   </div>
 </template>
 
 
 <script>
 export default {
-  name: "SafetyArea"
+  name: "SafetyArea",
+
+  methods: {
+    expandUp() {
+      const container = document.querySelector("div .main-container");
+      container.setAttribute("maximise", "maximised");
+      container.style = "top: 50px";
+    },
+
+    collapse() {
+      const container = document.querySelector("div .main-container");
+      container.setAttribute("minimised", "minimised");
+      container.style = "top: 850px";
+    }
+  }
 };
 </script>
 
@@ -105,6 +119,23 @@ div {
   top: auto;
   right: 0px;
   top: 850px;
+  position: absolute;
+  transition: top 1s linear;
+}
+
+.maximised {
+  background-color: transparent;
+  color: darkblue;
+  border-color: darkblue;
+  border-left: 1px solid;
+  padding-left: 10px;
+  overflow-x: visible;
+  width: 90%;
+  height: 120px;
+  overflow-y: visible;
+  top: auto;
+  right: 0px;
+  top: 50px;
   position: absolute;
   transition: top 1s linear;
 }
