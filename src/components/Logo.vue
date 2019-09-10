@@ -12,5 +12,7 @@ export default {};
 div {
   bottom: 0px;
   position: absolute;
+  /* transform: translate(0px, -80px); */
+  /* When tray is minimised  */
 }
 </style>
