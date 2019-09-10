@@ -1,62 +1,13 @@
 <template>
   <div class="main-container">
-    <p>IMPORTANT SAFETY INFORMATION</p>
-    <h3>Subhead 1</h3>Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-    when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-    but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
-    Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions
-    of Lorem Ipsum.
-    <br />
-
-    <h3>Subhead 2</h3>Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-    when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-    but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
-    Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions
-    of Lorem Ipsum.
-    <br />
-
-    <h3>Subhead 3</h3>Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-    when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-    but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
-    Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions
-    of Lorem Ipsum.
-    <br />
-
-    <h3>Subhead 4</h3>Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-    when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-    but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
-    Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions
-    of Lorem Ipsum.
-    <br />
-
-    <h3>Subhead 5</h3>Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-    when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-    but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
-    Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions
-    of Lorem Ipsum.
-    <br />
-
-    <h3>Subhead 6</h3>Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-    when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-    but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
-    Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions
-    of Lorem Ipsum.
-    <br />
-
-    <h3>Subhead 7</h3>Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-    when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-    but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
-    Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions
-    of Lorem Ipsum.
-    <br />
-
+    <iframe src="safetyInformation.html"></iframe>
     <div class="placeholder">
       <img :src="require('../../public/image-placeholder.jpg')" />
     </div>
     <button class="Full-Prescribing-Information">Full Prescribing Information</button>
 
     <button
-      v-on:click="expandUp(), hideExpand(), showCollapse(), loopSubheading()"
+      v-on:click="expandUp(), hideExpand(), showCollapse(), loopSubheading();"
       class="expand"
     >Expand</button>
     <div v-on:click="collapse(), showExpand(), hideCollapse()" class="collapse"></div>
@@ -67,6 +18,7 @@
 
 
 <script>
+// import safetyInformation from "../../public/safetyInformation.html";
 export default {
   name: "SafetyArea",
 
@@ -121,6 +73,11 @@ export default {
 </script>
 
 <style scoped>
+iframe {
+  width: 100%;
+  overflow-y: visible;
+  height: 2000px;
+}
 .main-container {
   background-color: transparent;
   color: darkblue;
