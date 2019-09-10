@@ -75,6 +75,12 @@
       Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions
       of Lorem Ipsum.
     </p>
+    <div class="placeholder">
+      <img :src="require('../../public/image-placeholder.jpg')" />
+    </div>
+    <button class="Full-Prescribing-Information">Full Prescribing Information</button>
+
+    <button class="expand">Expand</button>
   </div>
 </template>
 
@@ -101,5 +107,30 @@ div {
   top: 850px;
   position: absolute;
   transition: top 1s linear;
+}
+
+.placeholder {
+  top: 0px;
+  left: -180px;
+  position: absolute;
+  border-left: none;
+}
+
+.Full-Prescribing-Information {
+  position: absolute;
+  right: 200px;
+  bottom: 120px;
+  background: blue;
+  color: white;
+  height: 30px;
+}
+
+.expand {
+  position: absolute;
+  right: 80px;
+  bottom: 122px;
+  background-color: blue;
+  color: white;
+  font-size: 16px;
 }
 </style>

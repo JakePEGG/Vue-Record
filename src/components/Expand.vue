@@ -1,11 +1,12 @@
 
 
+  <!--
 <template>
-  <div>
-    <button v-on:click="expandUp()">Expand</button>
+ <div>
+    <button v-on:click="expandUp()">Expand</button> -->
     <!-- <font-awesome-icon icon="plus-circle" /> -->
     <!-- <i class="fas fa-plus-circle"></i> -->
-  </div>
+  <!-- </div>
 </template>
 
 <script>
@@ -34,9 +35,9 @@ div {
 }
 
 button {
-  background: blue;
-  color: white;
-  font-size: 18px;
-  font-family: arial;
+  position: absolute;
+  right: 80px;
+  bottom: 122px;
+  color: blue;
 }
 </style>

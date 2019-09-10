@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img :src="require('../../public/image-placeholder.jpg')" />
+    <!-- <img :src="require('../../public/image-placeholder.jpg')" /> -->
   </div>
 </template>
 
