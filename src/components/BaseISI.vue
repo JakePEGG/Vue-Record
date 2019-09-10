@@ -81,7 +81,7 @@
     <button class="Full-Prescribing-Information">Full Prescribing Information</button>
 
     <button v-on:click="expandUp(), hideExpand(), showCollapse()" class="expand">Expand</button>
-    <div class="collapse"></div>
+    <div v-on:click="collapse(), showExpand(), hideCollapse()" class="collapse"></div>
   </div>
 </template>
 
@@ -109,10 +109,22 @@ export default {
       expand.style = "display: none";
     },
 
+    showExpand() {
+      const expand = document.querySelector(".expand");
+      expand.setAttribute("hidden", "hidden");
+      expand.style = "display: unset";
+    },
+
     showCollapse() {
       const container = document.querySelector(".collapse");
       let collapse = "<button class='collapse'>Collapse</button>";
       container.innerHTML = collapse;
+      container.style = "display: unset";
+    },
+
+    hideCollapse() {
+      const container = document.querySelector(".collapse");
+      container.style = "display: none";
     }
   }
 };
@@ -141,7 +153,7 @@ export default {
   position: absolute;
   top: -25px;
   right: 10px;
-  background-color: blue;
+  background: blue;
   color: white;
   font-size: 16px;
 }
