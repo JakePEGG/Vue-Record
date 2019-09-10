@@ -80,7 +80,8 @@
     </div>
     <button class="Full-Prescribing-Information">Full Prescribing Information</button>
 
-    <button v-on:click="expandUp()" class="expand">Expand</button>
+    <button v-on:click="expandUp(), hideExpand(), showCollapse()" class="expand">Expand</button>
+    <div class="collapse"></div>
   </div>
 </template>
 
@@ -100,13 +101,25 @@ export default {
       const container = document.querySelector("div .main-container");
       container.setAttribute("minimised", "minimised");
       container.style = "top: 850px";
+    },
+
+    hideExpand() {
+      const expand = document.querySelector(".expand");
+      expand.setAttribute("hidden", "hidden");
+      expand.style = "display: none";
+    },
+
+    showCollapse() {
+      const container = document.querySelector(".collapse");
+      let collapse = "<button class='collapse'>Collapse</button>";
+      container.innerHTML = collapse;
     }
   }
 };
 </script>
 
 <style scoped>
-div {
+.main-container {
   background-color: transparent;
   color: darkblue;
   border-color: darkblue;
@@ -123,21 +136,14 @@ div {
   transition: top 1s linear;
 }
 
-.maximised {
-  background-color: transparent;
-  color: darkblue;
-  border-color: darkblue;
-  border-left: 1px solid;
-  padding-left: 10px;
-  overflow-x: visible;
-  width: 90%;
-  height: 120px;
-  overflow-y: visible;
-  top: auto;
-  right: 0px;
-  top: 50px;
+.collapse {
+  font-size: 24px;
   position: absolute;
-  transition: top 1s linear;
+  top: -25px;
+  right: 10px;
+  background-color: blue;
+  color: white;
+  font-size: 16px;
 }
 
 .placeholder {
