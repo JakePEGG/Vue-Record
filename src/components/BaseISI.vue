@@ -1,21 +1,19 @@
 <template>
   <div class="main-container">
-    <iframe src="safetyInformation.html"></iframe>
+    <iframe name="isiContent" src="safetyInformation.html"></iframe>
     <div class="placeholder">
       <img :src="require('../../public/image-placeholder.jpg')" />
     </div>
     <button class="Full-Prescribing-Information">Full Prescribing Information</button>
 
-    <button
-      v-on:click="expandUp(), hideExpand(), showCollapse(), loopSubheading();"
-      class="expand"
-    >Expand</button>
-    <div v-on:click="collapse(), showExpand(), hideCollapse()" class="collapse"></div>
+    <button v-on:click="expandUp(), loopSubheading()" class="expand">Expand</button>
+    <div v-on:click="collapse()" class="collapse"></div>
+    <!-- <button class="collapse">Collapse</button> -->
 
-    <div class="list-storage">
-      <ul>
-        <li class="subheadings"></li>
-      </ul>
+    <div class="subheadings">
+      <div v-for="label in labels">
+        <a v-bind:href="'safetyInformation.html#' + label" v-bind:key target="isiContent">{{label}}</a>
+      </div>
     </div>
   </div>
 </template>
@@ -24,58 +22,51 @@
 <script>
 export default {
   name: "SafetyArea",
+  data() {
+    return {
+      labels: []
+      // state: {}
+    };
+  },
 
   methods: {
     expandUp() {
       const container = document.querySelector("div .main-container");
-      container.setAttribute("maximise", "maximised");
-      container.style = "top: 50px";
+      container.classList.add("maximised");
+      container.classList.remove("minimised");
+
+      const expandBTN = document.querySelector(".expand");
+      expandBTN.classList.add("hidden");
+
+      const collapseBTN = document.querySelector(".collapse");
+      collapseBTN.classList.add("show");
+
+      const grid = document.querySelector(".collapse");
+      let collapse = "<button class='collapse'>Collapse</button>";
+      grid.innerHTML = collapse;
+      grid.classList.add("show");
     },
 
     collapse() {
       const container = document.querySelector("div .main-container");
-      container.setAttribute("minimised", "minimised");
-      container.style = "top: 850px";
-    },
+      container.classList.add("minimised");
+      container.classList.remove("maximised");
 
-    hideExpand() {
-      const expand = document.querySelector(".expand");
-      expand.setAttribute("hidden", "hidden");
-      expand.style = "display: none";
-    },
+      const expandBTN = document.querySelector(".expand");
+      expandBTN.classList.remove("hidden");
 
-    showExpand() {
-      const expand = document.querySelector(".expand");
-      expand.setAttribute("hidden", "hidden");
-      expand.style = "display: unset";
-    },
-
-    showCollapse() {
-      const container = document.querySelector(".collapse");
-      let collapse = "<button class='collapse'>Collapse</button>";
-      container.innerHTML = collapse;
-      container.style = "display: unset";
-    },
-
-    hideCollapse() {
-      const container = document.querySelector(".collapse");
-      container.style = "display: none";
+      const collapseBTN = document.querySelector(".collapse");
+      collapseBTN.classList.remove("show");
     },
 
     loopSubheading() {
       const subheadings = document
         .querySelector("iframe")
         .contentWindow.document.querySelectorAll("h3");
-      subheadings.forEach(item => {
+      let heading = subheadings.forEach(item => {
         item.setAttribute("id", item.innerText);
-        let heading = document.createElement("a");
-        heading.innerHTML = item.innerHTML;
-        heading.setAttribute(
-          "href",
-          "safetyInformation.html#" + item.innerText
-        );
-        heading.setAttribute("heading", "list");
-        document.querySelector(".subheadings").appendChild(heading);
+        this.labels.push(item.innerText);
+        return this.labels;
       });
     }
   }
@@ -83,6 +74,7 @@ export default {
 </script>
 
 <style scoped>
+/* General Styles */
 iframe {
   width: 100%;
   overflow-y: visible;
@@ -107,7 +99,7 @@ iframe {
   transition: top 1s linear;
 }
 
-.list-storage {
+.subheadings {
   background: transparent;
   position: absolute;
   left: -200px;
@@ -115,10 +107,7 @@ iframe {
   border: 1px blue solid;
   display: block;
   width: 130px;
-}
-
-.subheadings {
-  display: inline-block;
+  display: block;
 }
 
 .collapse {
@@ -138,6 +127,10 @@ iframe {
   border-left: none;
 }
 
+.collapse {
+  display: none;
+}
+
 .Full-Prescribing-Information {
   position: absolute;
   right: 200px;
@@ -154,5 +147,27 @@ iframe {
   background-color: blue;
   color: white;
   font-size: 16px;
+}
+
+/* Class Styles for State */
+
+.maximised {
+  top: 50px;
+}
+
+.minimised {
+  top: 850px;
+}
+
+.closed {
+  top: 950px;
+}
+
+.hidden {
+  display: none;
+}
+
+.show {
+  display: unset;
 }
 </style>
