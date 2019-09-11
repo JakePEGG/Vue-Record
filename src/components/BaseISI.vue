@@ -12,13 +12,16 @@
     >Expand</button>
     <div v-on:click="collapse(), showExpand(), hideCollapse()" class="collapse"></div>
 
-    <div class="subheadings"></div>
+    <div class="list-storage">
+      <ul>
+        <li class="subheadings"></li>
+      </ul>
+    </div>
   </div>
 </template>
 
 
 <script>
-// import safetyInformation from "../../public/safetyInformation.html";
 export default {
   name: "SafetyArea",
 
@@ -60,11 +63,18 @@ export default {
     },
 
     loopSubheading() {
-      const subheadings = document.querySelectorAll("h3");
+      const subheadings = document
+        .querySelector("iframe")
+        .contentWindow.document.querySelectorAll("h3");
       subheadings.forEach(item => {
         item.setAttribute("id", item.innerText);
         let heading = document.createElement("a");
         heading.innerHTML = item.innerHTML;
+        heading.setAttribute(
+          "href",
+          "safetyInformation.html#" + item.innerText
+        );
+        heading.setAttribute("heading", "list");
         document.querySelector(".subheadings").appendChild(heading);
       });
     }
@@ -77,7 +87,9 @@ iframe {
   width: 100%;
   overflow-y: visible;
   height: 2000px;
+  font-family: arial;
 }
+
 .main-container {
   background-color: transparent;
   color: darkblue;
@@ -95,11 +107,18 @@ iframe {
   transition: top 1s linear;
 }
 
-.subheadings {
+.list-storage {
   background: transparent;
   position: absolute;
-  left: 0px;
+  left: -200px;
+  top: 200px;
   border: 1px blue solid;
+  display: block;
+  width: 130px;
+}
+
+.subheadings {
+  display: inline-block;
 }
 
 .collapse {
