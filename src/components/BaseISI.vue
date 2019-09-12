@@ -1,15 +1,16 @@
 <template>
   <div class="main-container">
-    <iframe name="isiContent" src="safetyInformation.html"></iframe>
+    <iframe name="isiContent" src="safetyInformation.html" v-on:load="loopSubheading()"></iframe>
     <div class="placeholder">
       <img :src="require('../../public/image-placeholder.jpg')" />
     </div>
     <button class="Full-Prescribing-Information">Full Prescribing Information</button>
 
-    <button v-on:click="expandUp(), loopSubheading()" class="expand">Expand</button>
-    <div v-on:click="collapse()" class="collapse"></div>
-    <!-- <button class="collapse">Collapse</button> -->
+    <button v-on:click="expandUp()" class="expand">Expand</button>
 
+    <button>Collapse</button>"
+    <div v-on:click="collapse()" class="collapse"></div>
+    <!--  v-on:click="minimised" : state = "minimised" class='collapse' -->
     <div class="subheadings">
       <div v-for="label in labels">
         <a v-bind:href="'safetyInformation.html#' + label" v-bind:key target="isiContent">{{label}}</a>
@@ -24,15 +25,16 @@ export default {
   name: "SafetyArea",
   data() {
     return {
-      labels: []
-      // state: {}
+      labels: [],
+      state: ""
     };
   },
-
+  // {maximised : state="maximised", minimised: state="minimised", closed: state="closed"}
   methods: {
     expandUp() {
       const container = document.querySelector("div .main-container");
       container.classList.add("maximised");
+      this.state = "maximised";
       container.classList.remove("minimised");
 
       const expandBTN = document.querySelector(".expand");
@@ -51,6 +53,7 @@ export default {
       const container = document.querySelector("div .main-container");
       container.classList.add("minimised");
       container.classList.remove("maximised");
+      this.state = "minimised";
 
       const expandBTN = document.querySelector(".expand");
       expandBTN.classList.remove("hidden");
@@ -60,6 +63,7 @@ export default {
     },
 
     loopSubheading() {
+      console.log("Fired!");
       const subheadings = document
         .querySelector("iframe")
         .contentWindow.document.querySelectorAll("h3");
@@ -153,6 +157,10 @@ iframe {
 
 .maximised {
   top: 50px;
+}
+
+/* looking for multiple children  */
+.expanded .maximised {
 }
 
 .minimised {
