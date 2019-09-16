@@ -24,12 +24,21 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "SafetyArea",
+  created() {
+    axios.get("manifest.json").then(response => {
+      this.manifest = response.data;
+      console.log(this.manifest);
+    });
+  },
   data() {
     return {
       labels: [],
-      state: "minimised"
+      state: "minimised",
+      manifest: {}
     };
   },
 

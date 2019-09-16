@@ -1,0 +1,25 @@
+{
+    "brands": [{
+        "name": "Opdivo",
+        "piDocuments": [{
+                "title": "A PI DOc",
+                "filePath": "./a/path/pi.pdf"
+            },
+            {
+                "title": "Another PI DOc",
+                "filePath": "./a/path/pi2.pdf"
+            }
+        ]
+    }],
+
+    "isiDocuments": [{
+            "title": "An ISI",
+            "filePath": "./a/path/isi.html"
+        },
+        {
+            "title": "Another ISI",
+            "filePath": "./a/path/isi2.html"
+        }
+    ]
+
+}
