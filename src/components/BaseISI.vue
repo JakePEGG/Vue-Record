@@ -3,7 +3,13 @@
     class="main-container"
     v-bind:class="{ maximised: state == 'maximised',  minimised: state == 'minimised', closed: state == 'closed'}"
   >
-    <iframe name="isiContent" src="safetyInformation.html" v-on:load="loopSubheading()"></iframe>
+    <iframe
+      v-for="(isi, index) in manifest.isiDocuments"
+      v-bind:src="isi.filePath"
+      v-bind:id="index"
+      v-bind:class="{visible: index == currentISIDocument}"
+    ></iframe>
+
     <div class="placeholder">
       <img :src="require('../../public/image-placeholder.jpg')" />
     </div>
@@ -16,9 +22,9 @@
     <button v-on:click="state = 'minimised'" class="collapse" ref="collapse">Collapse</button>
 
     <div class="subheadings">
-      <div v-for="label in labels">
-        <a v-bind:href="'safetyInformation.html#' + label">{{label}}</a>
-      </div>
+      <!-- <div v-for="label in labels"> -->
+      <!-- <a v-bind:href="'safetyInformation.html#' + label">{{label}}</a> -->
+      <!-- </div> -->
     </div>
   </div>
 </template>
@@ -32,13 +38,15 @@ export default {
     axios.get("manifest.json").then(response => {
       this.manifest = response.data;
       console.log(this.manifest);
+      console.log(this.manifest.isiDocuments);
     });
   },
   data() {
     return {
       labels: [],
       state: "minimised",
-      manifest: {}
+      manifest: {},
+      currentISIDocument: 0
     };
   },
 
