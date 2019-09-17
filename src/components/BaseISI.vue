@@ -3,11 +3,15 @@
     class="main-container"
     v-bind:class="{ maximised: state == 'maximised',  minimised: state == 'minimised', closed: state == 'closed'}"
   >
+    <button v-for="(brand, index) in manifest.brands" v-on:click="alteredLoop()">{{brand.name}}</button>
+
+    <button v-on:click="state = 'maximised'" class="expand" ref="expand">Expand</button>
+    <button v-on:click="state = 'minimised'" class="collapse" ref="collapse">Collapse</button>
+
     <iframe
       v-for="(isi, index) in manifest.isiDocuments"
       v-bind:src="isi.filePath"
-      v-bind:id="index"
-      v-bind:class="{visible: index == currentISIDocument}"
+      v-bind:class="{active: currentISI == isi.filePath}"
     ></iframe>
 
     <div class="placeholder">
@@ -18,13 +22,12 @@
       v-on:click="loadPrescribingInformation()"
     >Full Prescribing Information</button>
 
-    <button v-on:click="state = 'maximised'" class="expand" ref="expand">Expand</button>
-    <button v-on:click="state = 'minimised'" class="collapse" ref="collapse">Collapse</button>
-
     <div class="subheadings">
       <!-- <div v-for="label in labels"> -->
       <!-- <a v-bind:href="'safetyInformation.html#' + label">{{label}}</a> -->
       <!-- </div> -->
+      <!--   v-bind:class="{active : 'active'}"Z -->
+      <!-- "currentISI == $event.target" -->
     </div>
   </div>
 </template>
@@ -34,19 +37,22 @@ import axios from "axios";
 
 export default {
   name: "SafetyArea",
-  created() {
+  beforeCreate() {
     axios.get("manifest.json").then(response => {
       this.manifest = response.data;
-      console.log(this.manifest);
-      console.log(this.manifest.isiDocuments);
+      this.currentISI = this.manifest.isiDocuments[1].filePath;
     });
   },
+
   data() {
     return {
       labels: [],
       state: "minimised",
-      manifest: {},
-      currentISIDocument: 0
+      manifest: {
+        brands: [],
+        isiDocuments: []
+      },
+      currentISI: 1
     };
   },
 
@@ -55,11 +61,14 @@ export default {
       state = "closed";
     },
 
+    setInactive() {},
+
     loadPrescribingInformation() {
       console.log("Axios will be here!");
     },
 
     loopSubheading() {
+      const labels = [];
       const subheadings = document
         .querySelector("iframe")
         .contentWindow.document.querySelectorAll("h3");
@@ -68,6 +77,19 @@ export default {
         this.labels.push(item.innerText);
         return this.labels;
       });
+    },
+
+    alteredLoop() {
+      const labels = [];
+      const subheadings = event.target;
+      console.log(event.target);
+      console.log(this.manifest.isiDocuments[0].title);
+      // let heading = subheadings.forEach(title => isiDocuments.title);
+    },
+    fire(brand) {
+      console.log(brand);
+      console.log(this.currentISI);
+      console.log(event.target);
     }
   }
 };
@@ -80,13 +102,21 @@ iframe {
   overflow-y: visible;
   height: 2000px;
   font-family: arial;
+  display: none;
 }
 
-img {
-  position: sticky;
-  top: 50px;
-  z-index: 10;
+.brandA {
+  position: absolute;
+  right: 302px;
+  bottom: 150px;
 }
+
+.brandB {
+  position: absolute;
+  right: 200px;
+  bottom: 150px;
+}
+
 .main-container {
   background-color: transparent;
   color: darkblue;
@@ -177,5 +207,9 @@ img {
 
 .closed .collapse {
   display: none;
+}
+
+.active {
+  display: block;
 }
 </style>

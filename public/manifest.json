@@ -1,16 +1,29 @@
 {
     "brands": [{
-        "name": "Opdivo",
-        "piDocuments": [{
-                "title": "A PI DOc",
-                "filePath": "./PrescribingInformationA.pdf"
-            },
-            {
-                "title": "Another PI DOc",
-                "filePath": "./PrescribingInformationB.pdf"
-            }
-        ]
-    }],
+            "name": "Opdivo",
+            "piDocuments": [{
+                    "title": "A PI DOc",
+                    "filePath": "./PrescribingInformationA.pdf"
+                },
+                {
+                    "title": "Another PI DOc",
+                    "filePath": "./PrescribingInformationB.pdf"
+                }
+            ]
+        },
+        {
+            "name": "Yeervoy",
+            "piDocuments": [{
+                    "title": "A PI DOc",
+                    "filePath": "./PrescribingInformationA.pdf"
+                },
+                {
+                    "title": "Another PI DOc",
+                    "filePath": "./PrescribingInformationB.pdf"
+                }
+            ]
+        }
+    ],
 
     "isiDocuments": [{
             "title": "An ISI",
