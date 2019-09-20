@@ -40,11 +40,12 @@
           @click.native="state = 'minimised'"
           class="collapse active"
         ></RoundButton>
+
         <!-- <button v-on:click="state = 'closed'" class="closed">Closes</button> -->
 
         <button
           class="Full-Prescribing-Information"
-          v-on:click="toggleVisibility()"
+          v-on:click="toggleVisibility(), brandCheck()"
         >Full Prescribing Information</button>
       </div>
 
@@ -66,16 +67,6 @@
 import axios from "axios";
 import RoundButton from "./RoundButton";
 
-// <!-- , this.currentISI == this.manifest.isiDocuments.filePath -->
-// <!-- <div v-for="label in labels"> -->
-// <!-- <a v-bind:href="'safetyInformation.html#' + label">{{label}}</a> -->
-// <!-- </div> -->
-// <!--   v-bind:class="{active : 'active'}"Z -->
-// <!-- "currentISI == $event.target" -->
-
-// <!-- v-bind:class="{active: active}"
-// v-on:click="active = !active"-->
-
 export default {
   name: "SafetyArea",
   beforeCreate() {
@@ -86,9 +77,9 @@ export default {
   },
 
   created() {
+    this.brandCheck();
     // loading ida
     /*
-
 
     ida.slide.meta.bms.isiDocument
     
@@ -137,6 +128,33 @@ export default {
 
       let branddivs = document.querySelector(".brandBTN");
       branddivs.classList.toggle("visible");
+    },
+
+    // Need help implementing
+    accordianLogic() {
+      var acc = document.getElementsByClassName("subheadings");
+      var i;
+
+      for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+          this.classList.toggle("active");
+          var panel = this.nextElementSibling;
+          if (panel.style.maxHeight) {
+            panel.style.maxHeight = null;
+          } else {
+            panel.style.maxHeight = panel.scrollHeight + "px";
+          }
+        });
+      }
+    },
+
+    brandCheck() {
+      let brands = this.manifest.brands;
+      if (brands.length == 1) {
+        return;
+        this.manifest.brands[0].piDocuments[0].filePath;
+        // this should be the full document
+      }
     },
 
     loopSubheading(index, event) {
