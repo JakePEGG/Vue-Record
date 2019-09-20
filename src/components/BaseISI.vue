@@ -44,7 +44,7 @@
 
         <button
           class="Full-Prescribing-Information"
-          v-on:click="loadPrescribingInformation(), showBrandButtons()"
+          v-on:click="toggleVisibility()"
         >Full Prescribing Information</button>
       </div>
 
@@ -128,8 +128,15 @@ export default {
         .setAttribute("src", isiFilePath + "#" + section);
     },
 
-    loadPrescribingInformation() {
-      console.log("Axios will be here!");
+    toggleVisibility() {
+      let brandbuttons = document.querySelector(".brandButtons");
+      brandbuttons.classList.toggle("visible");
+
+      let BB = document.querySelector(".brandButtons:nth-child(2)");
+      BB.classList.toggle("visible");
+
+      let branddivs = document.querySelector(".brandBTN");
+      branddivs.classList.toggle("visible");
     },
 
     loopSubheading(index, event) {
@@ -146,20 +153,7 @@ export default {
 
       this.$forceUpdate();
     }
-  },
-
-  toggleVisibility() {
-    let brandbuttons = document.querySelectorAll(".brandButtons");
-    brandbuttons.classList.toggle("visible", true);
   }
-
-  // test() {
-  //   let x = document.querySelector('.subheading').classList.toggle('visible', false);
-  // }
-
-  // showBrandButtons() {
-  //   document.querySelector(".brandButtons").classList.add("active");
-  // }
 };
 </script>
 
@@ -192,8 +186,12 @@ body {
   top: -10px;
 }
 
+.isiDocuments {
+  left: 50px;
+}
+
 .brandButtons {
-  /* display: none; */
+  display: none;
   position: relative;
   background-color: transparent;
   color: var(--main-color);
@@ -206,12 +204,8 @@ body {
   margin-right: 25px;
   border: none;
 }
-
-.isiDocuments {
-  left: 50px;
-}
 .brandBTN {
-  /* display: none; */
+  display: none;
   position: relative;
   right: 190px;
   background-color: transparent;
@@ -263,14 +257,14 @@ body {
 
 .expand {
   position: absolute;
-  left: 190px;
+  right: 0px;
   top: 10px;
   font-size: 16px;
 }
 
 .collapse {
   position: absolute;
-  left: 190px;
+  right: 0px;
   top: 10px;
   font-size: 16px;
 }
@@ -294,11 +288,6 @@ body {
 .maximised {
   top: 185px;
 }
-/* 
-.iframe .maximised {
-  height: 2000px;
-  transition: ease;
-} */
 
 .closed .placeholder {
   bottom: 80px;
@@ -338,6 +327,6 @@ body {
 }
 
 .visible {
-  display: block;
+  display: unset;
 }
 </style>

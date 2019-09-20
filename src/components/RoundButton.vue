@@ -81,7 +81,7 @@
 .label {
   position: absolute;
   top: 7px;
-  right: 67px;
+  right: 55px;
   text-transform: capitalize;
   color: var(--main-color);
   font-size: 16px;
@@ -94,6 +94,12 @@
   color: var(--button-font-color);
 }
 
+/* .label:nth-child(2) {
+  right: 70px;
+} */
+.round-button.active.collapse .label {
+  right: 75px;
+}
 .round-button.disabled .label {
   color: var(--button-disabled-font-color);
 }
