@@ -4,9 +4,10 @@
     v-bind:class="{ maximised: state == 'maximised',  minimised: state == 'minimised', closed: state == 'closed'}"
   >
     <div class="sidebar">
+      <div class="placeholder"></div>
       <div class="subheadings">
         <div v-for="(isiDoc, index) in manifest.isiDocuments">
-          <div>{{isiDoc.title}}</div>
+          <div class="subheading-title">{{isiDoc.title}}</div>
           <div>
             <div v-for="label in isiDoc.labels">
               <div v-on:click="showSection(isiDoc.filePath, label)">{{label}}</div>
@@ -14,33 +15,45 @@
           </div>
         </div>
       </div>
-      <div class="placeholder"></div>
     </div>
 
     <div class="content">
       <div class="buttonBar">
         <div class="brandBTN">
-          <button
-            v-for="(brand, index) in manifest.brands"
-            v-on:click="testing() == currentISI"
-            class="brandButtons"
-          >{{brand.name}}</button>
+          <button v-for="(brand, index) in manifest.brands" class="brandButtons">{{brand.name}}</button>
         </div>
 
-        <button v-on:click="state = 'maximised', alteredLoop()" class="expand" ref="expand">Expand</button>
-        <button v-on:click="state = 'minimised'" class="collapse" ref="collapse">Collapse</button>
+        <!-- <button v-on:click="state = 'maximised'" class="expand" ref="expand">Expand</button> -->
+
+        <RoundButton
+          label="EXPAND"
+          icon="plus.png"
+          @click.native="state = 'maximised'"
+          class="expand"
+        ></RoundButton>
+
+        <!-- <button v-on:click="state = 'minimised'" class="collapse" ref="collapse">Collapse</button> -->
+
+        <RoundButton
+          label="COLLAPSE"
+          icon="plus.png"
+          @click.native="state = 'minimised'"
+          class="collapse active"
+        ></RoundButton>
+        <!-- <button v-on:click="state = 'closed'" class="closed">Closes</button> -->
 
         <button
           class="Full-Prescribing-Information"
-          v-on:click="loadPrescribingInformation()"
+          v-on:click="loadPrescribingInformation(), showBrandButtons()"
         >Full Prescribing Information</button>
       </div>
 
       <div class="isiDocuments">
         <iframe
+          class="iframe"
           v-for="(isi, index) in manifest.isiDocuments"
           v-bind:src="isi.filePath"
-          v-bind:class="{active: currentISI == isi.filePath}"
+          v-bind:class="{active: currentISI == isi.filePath, maximised: state == 'maximised', minimised: state == 'minimised', closed: state == 'closed'}"
           v-on:load="loopSubheading(index, $event)"
           v-bind:name="isi.filePath"
         ></iframe>
@@ -51,6 +64,7 @@
 
 <script>
 import axios from "axios";
+import RoundButton from "./RoundButton";
 
 // <!-- , this.currentISI == this.manifest.isiDocuments.filePath -->
 // <!-- <div v-for="label in labels"> -->
@@ -86,6 +100,10 @@ export default {
 */
   },
 
+  components: {
+    RoundButton
+  },
+
   data() {
     return {
       labels: [],
@@ -114,14 +132,6 @@ export default {
       console.log("Axios will be here!");
     },
 
-    testing() {
-      const filepaths = [];
-      const data = this.manifest.isiDocuments;
-      data.map(function(data) {
-        return data.filePath;
-      });
-    },
-
     loopSubheading(index, event) {
       const iframe = event.target;
 
@@ -135,30 +145,21 @@ export default {
       this.manifest.isiDocuments[index].labels = labels;
 
       this.$forceUpdate();
-    },
-
-    alteredLoop() {
-      // const labels = [];
-      // const subheadings = document
-      //   .querySelector("iframe")
-      //   .contentWindow.document.querySelectorAll("h3");
-      // console.log(subheadings);
-      // let heading = subheadings.forEach(title => {
-      //   this.manifest.isiDocuments.title(
-      //     "Title",
-      //     this.manifest.isiDocuments.innerText
-      //   );
-      //   this.labels.push(title.innertext);
-      //   console.log("labels", this.labels);
-      // });
-    },
-    fire(brand) {
-      console.log(this.labels);
-      console.log(brand);
-      console.log(this.currentISI);
-      console.log(event.target);
     }
+  },
+
+  toggleVisibility() {
+    let brandbuttons = document.querySelectorAll(".brandButtons");
+    brandbuttons.classList.toggle("visible", true);
   }
+
+  // test() {
+  //   let x = document.querySelector('.subheading').classList.toggle('visible', false);
+  // }
+
+  // showBrandButtons() {
+  //   document.querySelector(".brandButtons").classList.add("active");
+  // }
 };
 </script>
 
@@ -170,8 +171,12 @@ iframe {
   height: 560px;
   font-family: arial;
   display: none;
+  border: none;
 }
 
+div.subheadings * {
+  margin-bottom: 15px;
+}
 .content {
   width: 836px;
 }
@@ -188,18 +193,35 @@ body {
 }
 
 .brandButtons {
+  /* display: none; */
   position: relative;
+  background-color: transparent;
+  color: var(--main-color);
+  font-family: var(--font-family);
   top: -20px;
-  right: 5px;
-  padding-right: 5px;
+  left: 60px;
+  font-size: 12px;
+  text-transform: uppercase;
+  margin-left: 25px;
+  margin-right: 25px;
+  border: none;
 }
 
+.isiDocuments {
+  left: 50px;
+}
 .brandBTN {
-  position: absolute;
-  right: 20px;
+  /* display: none; */
+  position: relative;
+  right: 190px;
+  background-color: transparent;
+  color: var(--main-color);
+  padding-bottom: 20px;
+  font-size: 15px;
 }
 
 .sidebar {
+  position: relative;
   width: 184px;
   margin-left: 4px;
   display: inline-block;
@@ -218,44 +240,42 @@ body {
 }
 
 .subheadings {
-  border: 1px blue solid;
+  position: relative;
+  font-family: var(--font-family);
   display: block;
   width: 130px;
   display: block;
+  left: 9px;
+  overflow-y: scroll;
+  margin: 2px;
+  height: 435px;
 }
 
 .Full-Prescribing-Information {
-  right: 200px;
-  bottom: 120px;
-  background: blue;
+  position: absolute;
+  right: 150px;
+  top: 0px;
+  width: 200px;
+  background: var(--main-color);
   color: white;
   height: 30px;
 }
 
 .expand {
-  right: 80px;
-  bottom: 122px;
-  background-color: blue;
-  color: white;
+  position: absolute;
+  left: 190px;
+  top: 10px;
   font-size: 16px;
 }
 
 .collapse {
-  right: 80px;
-  bottom: 122px;
-  background-color: blue;
-  color: white;
+  position: absolute;
+  left: 190px;
+  top: 10px;
   font-size: 16px;
 }
 
-/* Class Styles for State */
-
-.maximised {
-  top: 185px;
-}
-
 .placeholder {
-  top: 0px;
   position: relative;
   border-left: none;
   transition: all 0.5s ease;
@@ -263,14 +283,25 @@ body {
   margin-right: 8px;
   width: 172px;
   height: 100px;
+  margin-bottom: 25px;
   background-image: url("../../public/image-placeholder.jpg");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center top;
 }
+/* Class Styles for State */
+
+.maximised {
+  top: 185px;
+}
+/* 
+.iframe .maximised {
+  height: 2000px;
+  transition: ease;
+} */
 
 .closed .placeholder {
-  top: -100px;
+  bottom: 80px;
   background-position: center bottom;
 }
 
@@ -298,15 +329,15 @@ body {
   display: none;
 }
 
-/* .closed {
-  top: calc(194% - 950px);
-} */
-
 .closed .collapse {
   display: none;
 }
 
 .active {
+  display: block;
+}
+
+.visible {
   display: block;
 }
 </style>

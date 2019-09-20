@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<!-- saved from url=(0022)http://localhost:8080/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="icon" href="http://localhost:8080/favicon.ico">
+  <link rel="stylesheet" href="./isitray_files/font-awesome.min.css">
+  
+  <title>isitray</title>
+<link href="./isitray_files/app.js" rel="preload" as="script"><style type="text/css">
+.round-button[data-v-2a461f40] {
+  width: 60px;
+  -webkit-transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease;
+}
+.round-button img[data-v-2a461f40] {
+  width: 16px;
+  height: 16px;
+  top: -1px;
+  left: 8px;
+  position: relative;
+}
+.round-button.active .icon[data-v-2a461f40] {
+  display: none;
+}
+.round-button .close[data-v-2a461f40] {
+  display: none;
+  background-color: var(--button-background-color);
+  width: 20px;
+  height: 20px;
+  top: 6px;
+  left: 0px;
+}
+.round-button.active .close[data-v-2a461f40] {
+  display: block;
+}
+.disc[data-v-2a461f40] {
+  background-color: var(--button-background-color);
+  color: white;
+  width: 33px;
+  height: 33px;
+  border-radius: 100%;
+  margin: auto;
+  line-height: 33px;
+  -webkit-transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease;
+}
+.disc .icon[data-v-2a461f40] {
+  margin: auto;
+  vertical-align: middle;
+}
+.round-button.active .disc[data-v-2a461f40] {
+  color: var(--main-color);
+  background-color: white;
+  -webkit-box-shadow: 0px 0px 20px 0px var(--button-background-color);
+          box-shadow: 0px 0px 20px 0px var(--button-background-color);
+  -webkit-transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease;
+  -webkit-transition: -webkit-box-shadow 0.2s ease;
+  transition: -webkit-box-shadow 0.2s ease;
+  transition: box-shadow 0.2s ease;
+  transition: box-shadow 0.2s ease, -webkit-box-shadow 0.2s ease;
+}
+.round-button.disabled .disc[data-v-2a461f40] {
+  background-color: var(--button-disabled-background-color);
+}
+.round-button.disabled[data-v-2a461f40] {
+  pointer-events: none;
+}
+.round-button.hidden[data-v-2a461f40] {
+  opacity: 0;
+  pointer-events: none;
+}
+.label[data-v-2a461f40] {
+  text-align: center;
+  width: 100%;
+  font-size: var(--button-font-size);
+  margin-top: 5px;
+  padding: 0px;
+  font-family: var(--font-family);
+  color: var(--button-font-colo);
+}
+.round-button.disabled .label[data-v-2a461f40] {
+  color: var(--button-disabled-font-color);
+}
+</style><style type="text/css">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* General Styles */
+iframe[data-v-6347e2ee] {
+  width: 100%;
+  overflow-y: visible;
+  height: 560px;
+  font-family: arial;
+  display: none;
+}
+.content[data-v-6347e2ee] {
+  width: 836px;
+}
+.wrapper[data-v-6347e2ee],
+html[data-v-6347e2ee],
+body[data-v-6347e2ee] {
+  height: 100%;
+}
+body > div > div > div.sidebar > div.subheadings > div[data-v-6347e2ee] {
+  margin-top: 5px;
+}
+.buttonBar[data-v-6347e2ee] {
+  position: absolute;
+  right: 15px;
+  top: -10px;
+}
+.brandButtons[data-v-6347e2ee] {
+  position: relative;
+  top: -20px;
+  right: 5px;
+  padding-right: 5px;
+}
+.brandBTN[data-v-6347e2ee] {
+  position: absolute;
+  right: 20px;
+}
+.sidebar[data-v-6347e2ee] {
+  position: relative;
+  top: 200px;
+  width: 184px;
+  margin-left: 4px;
+  display: inline-block;
+}
+.main-container[data-v-6347e2ee] {
+  background-color: transparent;
+  color: darkblue;
+  border-color: darkblue;
+  border-left: 1px solid;
+  top: calc(100% - 150px);
+  display: grid;
+  position: absolute;
+  grid-template-columns: 188px 806px;
+  -webkit-transition: top 0.5s ease;
+  transition: top 0.5s ease;
+  bottom: 0px;
+}
+.subheadings[data-v-6347e2ee] {
+  position: relative;
+  border: 1px blue solid;
+  display: block;
+  width: 130px;
+  display: block;
+  bottom: 120px;
+  left: 20px;
+  overflow-y: scroll;
+}
+.Full-Prescribing-Information[data-v-6347e2ee] {
+  right: 200px;
+  bottom: 120px;
+  background: blue;
+  color: white;
+  height: 30px;
+}
+.expand[data-v-6347e2ee] {
+  right: 80px;
+  bottom: 122px;
+  font-size: 16px;
+}
+.collapse[data-v-6347e2ee] {
+  right: 80px;
+  bottom: 122px;
+  font-size: 16px;
+}
+.placeholder[data-v-6347e2ee] {
+  bottom: 200px;
+  position: relative;
+  border-left: none;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  margin-left: 8px;
+  margin-right: 8px;
+  width: 172px;
+  height: 100px;
+  background-image: url(/img/image-placeholder.57910bc9.jpg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center top;
+}
+/* Class Styles for State */
+.maximised[data-v-6347e2ee] {
+  top: 185px;
+}
+.maximised .iframe[data-v-6347e2ee] {
+  height: 1000px;
+  overflow-y: scroll;
+  -webkit-transition: ease;
+  transition: ease;
+}
+.closed .placeholder[data-v-6347e2ee] {
+  top: -300px;
+  background-position: center bottom;
+}
+.minised .placeholder[data-v-6347e2ee] {
+  top: calc(0 - 100%);
+}
+.closed[data-v-6347e2ee] {
+  top: calc(100% - 50px);
+}
+.maximised .expand[data-v-6347e2ee] {
+  display: none;
+}
+.maximised .collapse[data-v-6347e2ee] {
+  display: unset;
+  -webkit-transition: top 1s linear;
+  transition: top 1s linear;
+}
+.minimised[data-v-6347e2ee] {
+  top: calc(100% - 120px);
+}
+.minimised .collapse[data-v-6347e2ee] {
+  display: none;
+}
+.closed .collapse[data-v-6347e2ee] {
+  display: none;
+}
+.active[data-v-6347e2ee] {
+  display: block;
+}
+</style><style type="text/css">
+body,
+html {
+  margin: 0px;
+  padding: 0px;
+}
+#app {
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+:root {
+  --font-family: var(--isi-tray-font-family, "arial");
+  --main-color: var(--isi-tray-main-color, #27649f);
+  --secondary-color: var(--isi-tray-secondary-color, #ffffff);
+
+  --button-background-color: var(
+    --isi-tray-button-background-color,
+    var(--main-color)
+  );
+  --button-font-color: var(--isi-tray-button-font-color, var(--main-color));
+  --button-font-size: var(--isi-tray-button-font-size, 12px);
+  --button-disabled-background-color: var(
+    --isi-tray-button-disabled-background-color,
+    #9e9e9e
+  );
+  --button-disabled-font-color: var(
+    --isi-tray-button-disabled-font-color,
+    #9e9e9e
+  );
+}
+</style></head>
+
+<body>
+  <noscript>
+    <strong>We're sorry but isitray doesn't work properly without JavaScript enabled. Please enable it to
+      continue.</strong>
+  </noscript>
+  <div><div data-v-6347e2ee="" class="main-container minimised"><div data-v-6347e2ee="" class="sidebar"><div data-v-6347e2ee="" class="placeholder"></div><div data-v-6347e2ee="" class="subheadings"><div data-v-6347e2ee=""><div data-v-6347e2ee="" class="subheading-title">An ISI</div><div data-v-6347e2ee=""><div data-v-6347e2ee=""><div data-v-6347e2ee="">Subhead 1</div></div><div data-v-6347e2ee=""><div data-v-6347e2ee="">Subhead 2</div></div><div data-v-6347e2ee=""><div data-v-6347e2ee="">Subhead 3</div></div><div data-v-6347e2ee=""><div data-v-6347e2ee="">Subhead 4</div></div><div data-v-6347e2ee=""><div data-v-6347e2ee="">Subhead 5</div></div><div data-v-6347e2ee=""><div data-v-6347e2ee="">Subhead 6</div></div><div data-v-6347e2ee=""><div data-v-6347e2ee="">Subhead 7</div></div></div></div><div data-v-6347e2ee=""><div data-v-6347e2ee="" class="subheading-title">Another ISI</div><div data-v-6347e2ee=""><div data-v-6347e2ee=""><div data-v-6347e2ee="">Subhead A</div></div><div data-v-6347e2ee=""><div data-v-6347e2ee="">Subhead B</div></div><div data-v-6347e2ee=""><div data-v-6347e2ee="">Subhead C</div></div><div data-v-6347e2ee=""><div data-v-6347e2ee="">Subhead D</div></div><div data-v-6347e2ee=""><div data-v-6347e2ee="">Subhead E</div></div><div data-v-6347e2ee=""><div data-v-6347e2ee="">Subhead F</div></div><div data-v-6347e2ee=""><div data-v-6347e2ee="">Subhead G</div></div></div></div></div></div><div data-v-6347e2ee="" class="content"><div data-v-6347e2ee="" class="buttonBar"><div data-v-6347e2ee="" class="brandBTN"><button data-v-6347e2ee="" class="brandButtons">Opdivo</button><button data-v-6347e2ee="" class="brandButtons">Yeervoy</button></div><div data-v-2a461f40="" data-v-6347e2ee="" class="round-button expand" style="
+    position: absolute;
+"><div data-v-2a461f40="" class="disc"><img data-v-2a461f40="" src="./isitray_files/plus.png" class="icon"><img data-v-2a461f40="" src="./isitray_files/close.png" class="icon close"></div><div data-v-2a461f40="" class="label">Expand</div></div><div data-v-2a461f40="" data-v-6347e2ee="" class="round-button collapse active" style="
+    position: absolute;
+    left: 100px;
+"><div data-v-2a461f40="" class="disc"><img data-v-2a461f40="" src="./isitray_files/plus.png" class="icon"><img data-v-2a461f40="" src="./isitray_files/close.png" class="icon close"></div><div data-v-2a461f40="" class="label">Collapse</div></div><button data-v-6347e2ee="" class="Full-Prescribing-Information">Full Prescribing Information</button></div><div data-v-6347e2ee="" class="isiDocuments"><iframe data-v-6347e2ee="" src="./isitray_files/isi.html" name="./isi.html" class="iframe active"></iframe><iframe data-v-6347e2ee="" src="./isitray_files/isi2.html" name="./isi2.html" class="iframe"></iframe></div></div></div></div>
+  <!-- built files will be auto injected -->
+<script type="text/javascript" src="./isitray_files/app.js"></script>
+
+</body></html>
