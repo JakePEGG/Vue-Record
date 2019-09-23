@@ -12,7 +12,7 @@
             <div
               ref="subheading-buttons"
               v-for="label in isiDoc.labels"
-              v-on:click="showSection(isiDoc.filePath, label), toggleClass(index)"
+              v-on:click="showSection(isiDoc.filePath, label)"
             >{{label}}</div>
           </div>
         </div>
@@ -25,9 +25,6 @@
           <button v-for="(brand, index) in manifest.brands" class="brandBtn">{{brand.name}}</button>
         </div>
 
-        <!-- v-on:click="toggleMenu(this) , "
-        <button v-on:click="state = 'maximised'" class="expand" ref="expand">Expand</button>-->
-
         <RoundButton
           label="EXPAND"
           icon="plus.png"
@@ -36,16 +33,12 @@
           v-on:click="accordianlogic()"
         ></RoundButton>
 
-        <!-- <button v-on:click="state = 'minimised'" class="collapse" ref="collapse">Collapse</button> -->
-
         <RoundButton
           label="COLLAPSE"
           icon="plus.png"
           @click.native="state = 'minimised'"
           class="collapse active"
         ></RoundButton>
-
-        <!-- <button v-on:click="state = 'closed'" class="closed">Closes</button> -->
 
         <button
           class="Full-Prescribing-Information"
@@ -126,30 +119,8 @@ export default {
         .setAttribute("src", isiFilePath + "#" + section);
     },
 
-    // test() {
-    //   console.log(this.manifest.brands[0].piDocuments.length);
-    // },
-
     showBrands() {
       this.showBrandButtons = !this.showBrandButtons;
-    },
-
-    // Need help implementing
-    accordianLogic() {
-      var acc = document.getElementsByClassName("subheadings");
-      var i;
-
-      for (i = 0; i < acc.length; i++) {
-        acc[i].addEventListener("click", function() {
-          this.classList.toggle("active");
-          var panel = this.nextElementSibling;
-          if (panel.style.maxHeight) {
-            panel.style.maxHeight = null;
-          } else {
-            panel.style.maxHeight = panel.scrollHeight + "px";
-          }
-        });
-      }
     },
 
     brandCheck() {
@@ -203,15 +174,6 @@ html,
 body {
   height: 100%;
 }
-
-/* .panel {
-  padding: 0 18px;
-  background-color: white;
-  color: var(--main-color);
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.2s ease-out;
-} */
 
 .panel {
   overflow: hidden;
@@ -299,20 +261,6 @@ body {
   height: 30px;
 }
 
-.expand {
-  position: absolute;
-  right: 0px;
-  top: 10px;
-  font-size: 16px;
-}
-
-.collapse {
-  position: absolute;
-  right: 0px;
-  top: 10px;
-  font-size: 16px;
-}
-
 .placeholder {
   position: relative;
   border-left: none;
@@ -328,6 +276,20 @@ body {
   background-position: center top;
 }
 /* Class Styles for State */
+
+.expand {
+  position: absolute;
+  right: 0px;
+  top: 10px;
+  font-size: 16px;
+}
+
+.collapse {
+  position: absolute;
+  right: 0px;
+  top: 10px;
+  font-size: 16px;
+}
 
 .maximised {
   top: 185px;
@@ -373,8 +335,4 @@ body {
 .visible {
   display: unset;
 }
-
-/* .topple {
-  max-height: 1000px;
-} */
 </style>
