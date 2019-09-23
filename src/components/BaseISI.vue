@@ -217,11 +217,12 @@ body {
   overflow: hidden;
   background-color: white;
   max-height: 1000px;
+  transition: max-height 0.35s ease-in;
 }
 
 .panel.topple {
   max-height: 0px;
-  transition: max-height 0.2s ease-out;
+  transition: max-height 0.35s ease-out;
 }
 
 .buttonBar {
@@ -373,7 +374,7 @@ body {
   display: unset;
 }
 
-.topple {
+/* .topple {
   max-height: 1000px;
-}
+} */
 </style>
