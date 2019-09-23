@@ -7,11 +7,13 @@
       <div class="placeholder"></div>
       <div class="subheadings">
         <div v-for="(isiDoc, index) in manifest.isiDocuments">
-          <div class="subheading-title">{{isiDoc.title}}</div>
-          <div>
-            <div v-for="label in isiDoc.labels">
-              <div v-on:click="showSection(isiDoc.filePath, label)">{{label}}</div>
-            </div>
+          <div class="subheading-title accordian">{{isiDoc.title}}</div>
+          <div class="panel" ref="panel">
+            <div
+              ref="subheading-buttons"
+              v-for="label in isiDoc.labels"
+              v-on:click="showSection(isiDoc.filePath, label), toggleClass(index)"
+            >{{label}}</div>
           </div>
         </div>
       </div>
@@ -19,17 +21,19 @@
 
     <div class="content">
       <div class="buttonBar">
-        <div class="brandBTN">
-          <button v-for="(brand, index) in manifest.brands" class="brandButtons">{{brand.name}}</button>
+        <div class="brandButtons" v-bind:class="{visible:showBrandButtons}">
+          <button v-for="(brand, index) in manifest.brands" class="brandBtn">{{brand.name}}</button>
         </div>
 
-        <!-- <button v-on:click="state = 'maximised'" class="expand" ref="expand">Expand</button> -->
+        <!-- v-on:click="toggleMenu(this)"
+        <button v-on:click="state = 'maximised'" class="expand" ref="expand">Expand</button>-->
 
         <RoundButton
           label="EXPAND"
           icon="plus.png"
           @click.native="state = 'maximised'"
           class="expand"
+          v-on:click="accordianlogic()"
         ></RoundButton>
 
         <!-- <button v-on:click="state = 'minimised'" class="collapse" ref="collapse">Collapse</button> -->
@@ -45,7 +49,7 @@
 
         <button
           class="Full-Prescribing-Information"
-          v-on:click="toggleVisibility(), brandCheck(), test()"
+          v-on:click="brandCheck()"
         >Full Prescribing Information</button>
       </div>
 
@@ -77,7 +81,6 @@ export default {
   },
 
   created() {
-    this.brandCheck();
     // loading ida
     /*
 
@@ -99,6 +102,7 @@ export default {
     return {
       labels: [],
       state: "minimised",
+      showBrandButtons: false,
       manifest: {
         brands: [],
         isiDocuments: []
@@ -112,6 +116,9 @@ export default {
       state = "closed";
     },
 
+    toggleClass(index) {
+      this.$refs.panel[index].classList.add("topple");
+    },
     showSection(isiFilePath, section) {
       this.currentISI = isiFilePath;
       document
@@ -119,19 +126,12 @@ export default {
         .setAttribute("src", isiFilePath + "#" + section);
     },
 
-    test() {
-      console.log(this.manifest.brands[0].piDocuments.length);
-    },
+    // test() {
+    //   console.log(this.manifest.brands[0].piDocuments.length);
+    // },
 
-    toggleVisibility() {
-      let brandbuttons = document.querySelector(".brandButtons");
-      brandbuttons.classList.toggle("visible");
-
-      let BB = document.querySelector(".brandButtons:nth-child(2)");
-      BB.classList.toggle("visible");
-
-      let branddivs = document.querySelector(".brandBTN");
-      branddivs.classList.toggle("visible");
+    showBrands() {
+      this.showBrandButtons = !this.showBrandButtons;
     },
 
     // Need help implementing
@@ -154,16 +154,12 @@ export default {
 
     brandCheck() {
       let brands = this.manifest.brands;
-      if (brands.length == 1 && brands[0].piDocuments == 1) {
+      if (brands.length == 1) {
         return;
         this.manifest.brands[0].piDocuments[0].filePath;
-        // this should be the full document
       }
-      if (brands.length > 1 && brands[0].piDocuments > 1) {
-        toggleVisibility();
-      }
-      if (brands.length == 1 && brands[0].piDocuments > 1) {
-        toggleVisibility();
+      if (brands.length > 1) {
+        this.showBrands();
       }
     },
 
@@ -208,6 +204,15 @@ body {
   height: 100%;
 }
 
+.panel {
+  padding: 0 18px;
+  background-color: white;
+  color: var(--main-color);
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
 .buttonBar {
   position: absolute;
   right: 15px;
@@ -218,8 +223,7 @@ body {
   left: 50px;
 }
 
-.brandButtons {
-  display: none;
+.brandBtn {
   position: relative;
   background-color: transparent;
   color: var(--main-color);
@@ -232,7 +236,7 @@ body {
   margin-right: 25px;
   border: none;
 }
-.brandBTN {
+.brandButtons {
   display: none;
   position: relative;
   right: 190px;
@@ -356,5 +360,9 @@ body {
 
 .visible {
   display: unset;
+}
+
+.topple {
+  max-height: 1000px;
 }
 </style>
