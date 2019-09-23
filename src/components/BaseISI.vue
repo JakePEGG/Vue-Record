@@ -45,7 +45,7 @@
 
         <button
           class="Full-Prescribing-Information"
-          v-on:click="toggleVisibility(), brandCheck()"
+          v-on:click="toggleVisibility(), brandCheck(), test()"
         >Full Prescribing Information</button>
       </div>
 
@@ -119,6 +119,10 @@ export default {
         .setAttribute("src", isiFilePath + "#" + section);
     },
 
+    test() {
+      console.log(this.manifest.brands[0].piDocuments.length);
+    },
+
     toggleVisibility() {
       let brandbuttons = document.querySelector(".brandButtons");
       brandbuttons.classList.toggle("visible");
@@ -154,6 +158,9 @@ export default {
         return;
         this.manifest.brands[0].piDocuments[0].filePath;
         // this should be the full document
+      }
+      if (brands.length > 1 && brands[0].piDocuments > 1) {
+        toggleVisibility();
       }
     },
 
