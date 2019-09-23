@@ -154,12 +154,15 @@ export default {
 
     brandCheck() {
       let brands = this.manifest.brands;
-      if (brands.length == 1) {
+      if (brands.length == 1 && brands[0].piDocuments == 1) {
         return;
         this.manifest.brands[0].piDocuments[0].filePath;
         // this should be the full document
       }
       if (brands.length > 1 && brands[0].piDocuments > 1) {
+        toggleVisibility();
+      }
+      if (brands.length == 1 && brands[0].piDocuments > 1) {
         toggleVisibility();
       }
     },
