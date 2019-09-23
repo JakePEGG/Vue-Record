@@ -7,7 +7,7 @@
       <div class="placeholder"></div>
       <div class="subheadings">
         <div v-for="(isiDoc, index) in manifest.isiDocuments">
-          <div class="subheading-title accordian">{{isiDoc.title}}</div>
+          <div class="subheading-title accordian" v-on:click="toggleClass(index)">{{isiDoc.title}}</div>
           <div class="panel" ref="panel">
             <div
               ref="subheading-buttons"
@@ -25,7 +25,7 @@
           <button v-for="(brand, index) in manifest.brands" class="brandBtn">{{brand.name}}</button>
         </div>
 
-        <!-- v-on:click="toggleMenu(this)"
+        <!-- v-on:click="toggleMenu(this) , "
         <button v-on:click="state = 'maximised'" class="expand" ref="expand">Expand</button>-->
 
         <RoundButton
@@ -117,7 +117,7 @@ export default {
     },
 
     toggleClass(index) {
-      this.$refs.panel[index].classList.add("topple");
+      this.$refs.panel[index].classList.toggle("topple");
     },
     showSection(isiFilePath, section) {
       this.currentISI = isiFilePath;
@@ -204,12 +204,23 @@ body {
   height: 100%;
 }
 
-.panel {
+/* .panel {
   padding: 0 18px;
   background-color: white;
   color: var(--main-color);
   max-height: 0;
   overflow: hidden;
+  transition: max-height 0.2s ease-out;
+} */
+
+.panel {
+  overflow: hidden;
+  background-color: white;
+  max-height: 1000px;
+}
+
+.panel.topple {
+  max-height: 0px;
   transition: max-height 0.2s ease-out;
 }
 
