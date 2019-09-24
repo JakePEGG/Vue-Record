@@ -8,6 +8,18 @@
   <link rel="icon" href="<%= BASE_URL %>favicon.ico">
   <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
   </link>
+
+  <!-- pull the styles from the product in iDetailAid -->
+
+  <script src="./ida/iDetailAid_viewer_mock_manifest.js"></script>
+  <script src="./ida/iDetailAid_viewer_mock_api.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="../presentation_viewer/presentations/default/css/bms_components.css">
+
+  <!-- OR from veeva -->
+  <link rel="stylesheet" type="text/css"
+    href="../../shared/presentation_viewer/presentations/default/css/bms_components.css">
+
   <title>isitray</title>
 </head>
 
@@ -16,7 +28,7 @@
     <strong>We're sorry but isitray doesn't work properly without JavaScript enabled. Please enable it to
       continue.</strong>
   </noscript>
-  <div id="app"></div>
+  <div id="app" class="isi-tray"></div>
   <!-- built files will be auto injected -->
 </body>
 

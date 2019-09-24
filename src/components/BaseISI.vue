@@ -1,60 +1,70 @@
+
 <template>
   <div
-    class="main-container"
-    v-bind:class="{ maximised: state == 'maximised',  minimised: state == 'minimised', closed: state == 'closed'}"
+    class="bg"
+    v-bind:class="{maximised: state == 'maximised',  minimised: state == 'minimised', closed: state == 'closed'}"
   >
-    <div class="sidebar">
-      <div class="placeholder"></div>
-      <div class="subheadings">
-        <div v-for="(isiDoc, index) in manifest.isiDocuments">
-          <div class="subheading-title accordian" v-on:click="toggleClass(index)">{{isiDoc.title}}</div>
-          <div class="panel" ref="panel">
-            <div
-              ref="subheading-buttons"
-              v-for="label in isiDoc.labels"
-              v-on:click="showSection(isiDoc.filePath, label)"
-            >{{label}}</div>
+    <div class="main-container interactive" ref="mainContainer" v-bind:class="{ animate: animate }">
+      <div class="sidebar">
+        <div class="logo"></div>
+        <div class="subheadings">
+          <div v-for="(isiDoc, index) in manifest.isiDocuments">
+            <div class="subheading-title accordian" v-on:click="toggleClass(index)">{{isiDoc.title}}</div>
+            <div class="panel" ref="panel">
+              <div
+                ref="subheading-buttons"
+                v-for="label in isiDoc.labels"
+                v-on:click="showSection(isiDoc.filePath, label)"
+              >{{label}}</div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="content">
-      <div class="buttonBar">
-        <div class="brandButtons" v-bind:class="{visible:showBrandButtons}">
-          <button v-for="(brand, index) in manifest.brands" class="brandBtn">{{brand.name}}</button>
+      <div class="content">
+        <div class="buttonBar">
+          <div class="brandButtons" v-bind:class="{visible:showBrandButtons}">
+            <button
+              v-for="(brand, index) in manifest.brands"
+              class="brandBtn"
+              v-on:click="openPDFs()"
+            >{{brand.name}}</button>
+          </div>
+
+          <div class="safetyInformationHeader">
+            <h3>IMPORTANT SAFETY INFORMATION</h3>
+          </div>
+
+          <RoundButton
+            label="EXPAND"
+            icon="plus.png"
+            @click.native="state = 'maximised', animate = true;"
+            class="expand"
+          ></RoundButton>
+
+          <RoundButton
+            label="COLLAPSE"
+            icon="plus.png"
+            @click.native="state = closedState"
+            class="collapse active"
+          ></RoundButton>
+
+          <button
+            class="Full-Prescribing-Information"
+            v-on:click="brandCheck()"
+          >Full Prescribing Information</button>
         </div>
 
-        <RoundButton
-          label="EXPAND"
-          icon="plus.png"
-          @click.native="state = 'maximised'"
-          class="expand"
-          v-on:click="accordianlogic()"
-        ></RoundButton>
-
-        <RoundButton
-          label="COLLAPSE"
-          icon="plus.png"
-          @click.native="state = 'minimised'"
-          class="collapse active"
-        ></RoundButton>
-
-        <button
-          class="Full-Prescribing-Information"
-          v-on:click="brandCheck()"
-        >Full Prescribing Information</button>
-      </div>
-
-      <div class="isiDocuments">
-        <iframe
-          class="iframe"
-          v-for="(isi, index) in manifest.isiDocuments"
-          v-bind:src="isi.filePath"
-          v-bind:class="{active: currentISI == isi.filePath, maximised: state == 'maximised', minimised: state == 'minimised', closed: state == 'closed'}"
-          v-on:load="loopSubheading(index, $event)"
-          v-bind:name="isi.filePath"
-        ></iframe>
+        <div class="isiDocuments">
+          <iframe
+            class="iframe"
+            v-for="(isi, index) in manifest.isiDocuments"
+            v-bind:src="isi.filePath"
+            v-bind:class="{active: currentISI == isi.filePath, maximised: state == 'maximised', minimised: state == 'minimised', closed: state == 'closed'}"
+            v-on:load="iframeLoaded(index, $event)"
+            v-bind:name="isi.filePath"
+          ></iframe>
+        </div>
       </div>
     </div>
   </div>
@@ -63,28 +73,28 @@
 <script>
 import axios from "axios";
 import RoundButton from "./RoundButton";
+import ida from "../models/ida";
 
 export default {
   name: "SafetyArea",
   beforeCreate() {
-    axios.get("manifest.json").then(response => {
-      this.manifest = response.data;
-      this.currentISI = this.manifest.isiDocuments[0].filePath;
-    });
-  },
+    // TODO : this path needs to be adjusted when we are in veeva to be
+    // ../shared/presentations/default/isiDocuments/manifest.json
+    axios
+      .get(
+        "../presentation_viewer/presentations/default/isiDocuments/manifest.json"
+      )
+      .then(response => {
+        this.manifest = response.data;
+        this.currentISI = this.manifest.isiDocuments[0].filePath;
 
-  created() {
-    // loading ida
-    /*
-
-    ida.slide.meta.bms.isiDocument
-    
-    const docName = ida.slide.meta.bms.isiDocumnet || this.manifest.isiDocuments[0].title;
-
-    cons doc = this.manifest.isiDocuments.find( doc => doc.title == docName )
-
-    this.showSection(doc.filePath, ida.slide.meta.bms.isiHeading);
-*/
+        if (!ida.currentSlide.meta.bms.isi_section) {
+          this.closedState = "closed";
+        } else {
+          this.closedState = "minimised";
+        }
+        this.state = this.closedState;
+      });
   },
 
   components: {
@@ -94,8 +104,11 @@ export default {
   data() {
     return {
       labels: [],
-      state: "minimised",
+      closedState: "",
+      state: "",
+      animate: false,
       showBrandButtons: false,
+      loadediFrames: 0,
       manifest: {
         brands: [],
         isiDocuments: []
@@ -104,19 +117,54 @@ export default {
     };
   },
 
+  updated() {},
+
   methods: {
-    closed() {
-      state = "closed";
+    openPDFs() {
+      window.open("../../public/PrescribingInformationA.pdf");
+    },
+
+    iframeLoaded(index, event) {
+      this.loopSubheading(index, event);
+
+      this.loadediFrames += 1;
+
+      if (this.manifest.isiDocuments.length == this.loadediFrames) {
+        this.showDefaultSection();
+      }
+    },
+
+    showDefaultSection() {
+      const docName = ida.currentSlide.meta.bms.isi_document;
+      const section = ida.currentSlide.meta.bms.isi_section;
+
+      if (section) {
+        let doc = this.manifest.isiDocuments.find(doc => doc.title == docName);
+
+        if (!doc) {
+          doc = this.manifest.isiDocuments[0];
+        }
+
+        const docPath = doc.filePath;
+
+        this.showSection(docPath, section);
+      }
     },
 
     toggleClass(index) {
       this.$refs.panel[index].classList.toggle("topple");
     },
+
     showSection(isiFilePath, section) {
       this.currentISI = isiFilePath;
-      document
-        .querySelector(`iframe[name="${isiFilePath}"]`)
-        .setAttribute("src", isiFilePath + "#" + section);
+
+      // defer navigating the iframe as this doesnt work until the iframe is dispay:block
+      // which setting currentISI will update
+      this.$nextTick(() => {
+        document
+          .querySelector(`iframe[name="${isiFilePath}"]`)
+          .setAttribute("src", isiFilePath + "#" + section);
+      });
     },
 
     showBrands() {
@@ -158,9 +206,23 @@ iframe {
   width: 100%;
   overflow-y: visible;
   height: 560px;
-  font-family: arial;
+  font-family: var(--main-font);
+  color: var(--main-color);
   display: none;
   border: none;
+}
+
+.safetyInformationHeader {
+  position: absolute;
+  right: 180px;
+  font-size: 12px;
+  top: 0px;
+  display: inline-block;
+  width: 600px;
+  margin-bottom: 20px;
+  color: var(--main-color);
+  font-family: var(--main-font);
+  font-size: var(--main-font-size);
 }
 
 div.subheadings * {
@@ -169,9 +231,7 @@ div.subheadings * {
 .content {
   width: 836px;
 }
-.wrapper,
-html,
-body {
+.wrapper {
   height: 100%;
 }
 
@@ -194,7 +254,7 @@ body {
 }
 
 .isiDocuments {
-  left: 50px;
+  margin-top: 50px;
 }
 
 .brandBtn {
@@ -228,6 +288,7 @@ body {
 }
 .main-container {
   background-color: transparent;
+  background-color: white;
   color: darkblue;
   border-color: darkblue;
   border-left: 1px solid;
@@ -235,8 +296,12 @@ body {
   display: grid;
   position: absolute;
   grid-template-columns: 188px 806px;
-  transition: top 0.5s ease;
   bottom: 0px;
+  width: 100%;
+}
+
+.main-container.animate {
+  transition: top 0.5s ease;
 }
 
 .subheadings {
@@ -261,7 +326,7 @@ body {
   height: 30px;
 }
 
-.placeholder {
+.logo {
   position: relative;
   border-left: none;
   transition: all 0.5s ease;
@@ -270,7 +335,6 @@ body {
   width: 172px;
   height: 100px;
   margin-bottom: 25px;
-  background-image: url("../../public/image-placeholder.jpg");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center top;
@@ -291,40 +355,51 @@ body {
   font-size: 16px;
 }
 
-.maximised {
+.maximised .main-container {
   top: 185px;
 }
 
-.closed .placeholder {
+.closed .main-container .logo {
   bottom: 80px;
   background-position: center bottom;
 }
 
-.minised .placeholder {
+.minised .main-container .logo {
   top: calc(0 - 100%);
 }
 
-.closed {
+.closed .main-container {
   top: calc(100% - 50px);
 }
-.maximised .expand {
+.maximised .main-container .expand {
   display: none;
 }
 
-.maximised .collapse {
+.maximised .main-container .collapse {
   display: unset;
   transition: top 1s linear;
 }
 
-.minimised {
+.bg {
+  background-color: transparent;
+  transition: background-color 0.5s ease;
+  width: 100%;
+  height: 100%;
+}
+
+.maximised.bg {
+  background-color: blue;
+}
+
+.minimised .main-container {
   top: calc(100% - 120px);
 }
 
-.minimised .collapse {
+.minimised .main-container .collapse {
   display: none;
 }
 
-.closed .collapse {
+.closed .main-container .collapse {
   display: none;
 }
 

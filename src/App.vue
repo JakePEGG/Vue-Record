@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <BaseISI></BaseISI>
-  </div>
+  <BaseISI></BaseISI>
 </template>
 
 <script>
@@ -20,6 +18,10 @@ body,
 html {
   margin: 0px;
   padding: 0px;
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
 }
 
 #app {
@@ -32,12 +34,12 @@ html {
 }
 
 :root {
-  --font-family: var(--isi-tray-font-family, "arial");
-  --main-color: var(--isi-tray-main-color, #27649f);
-  --secondary-color: var(--isi-tray-secondary-color, #ffffff);
+  --font-family: var(--bms-brand-font-family, "arial");
+  --main-color: var(--bms-brand-main-color, #27649f);
+  --secondary-color: var(--bms-brand-secondary-color, #ffffff);
 
   --button-background-color: var(
-    --isi-tray-button-background-color,
+    --bms-brand-button-background-color,
     var(--main-color)
   );
   --button-font-color: var(--isi-tray-button-font-color, var(--main-color));
@@ -50,5 +52,20 @@ html {
     --isi-tray-button-disabled-font-color,
     #9e9e9e
   );
+
+  --isi-tray-logo: var(--logo);
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  background-color: var(--bms-scroll-bg, #e3e7eb);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--bms-scroll-thumb, #44484a);
+}
+
+*::-webkit-scrollbar-track {
+  background-color: transparent;
 }
 </style>
