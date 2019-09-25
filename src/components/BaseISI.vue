@@ -59,7 +59,7 @@
           <iframe
             class="iframe"
             v-for="(isi, index) in manifest.isiDocuments"
-            v-bind:src="isi.filePath"
+            v-bind:src="basePath + isi.filePath"
             v-bind:class="{active: currentISI == isi.filePath, maximised: state == 'maximised', minimised: state == 'minimised', closed: state == 'closed'}"
             v-on:load="iframeLoaded(index, $event)"
             v-bind:name="isi.filePath"
@@ -78,14 +78,21 @@ import ida from "../models/ida";
 export default {
   name: "SafetyArea",
   beforeCreate() {
+    this.basePath = "../shared/presentation_viewer/presentations/default/";
+
     // TODO : this path needs to be adjusted when we are in veeva to be
     // ../shared/presentations/default/isiDocuments/manifest.json
     axios
-      .get(
-        "../presentation_viewer/presentations/default/isiDocuments/manifest.json"
-      )
+      .get(this.basePath + "isiDocuments/manifest.json")
+
+      .catch(error => {
+        this.basePath = "../presentation_viewer/presentations/default/";
+        return axios.get(this.basePath + "isiDocuments/manifest.json");
+      })
+
       .then(response => {
         this.manifest = response.data;
+
         this.currentISI = this.manifest.isiDocuments[0].filePath;
 
         if (!ida.currentSlide.meta.bms.isi_section) {
@@ -163,7 +170,7 @@ export default {
       this.$nextTick(() => {
         document
           .querySelector(`iframe[name="${isiFilePath}"]`)
-          .setAttribute("src", isiFilePath + "#" + section);
+          .setAttribute("src", this.basePath + isiFilePath + "#" + section);
       });
     },
 

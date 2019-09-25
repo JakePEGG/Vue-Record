@@ -3,11 +3,11 @@
             "name": "Opdivo",
             "piDocuments": [{
                     "title": "A PI DOc",
-                    "filePath": "./PrescribingInformationA.pdf"
+                    "filePath": "isiDocuments/PrescribingInformationA.pdf"
                 },
                 {
                     "title": "Another PI DOc",
-                    "filePath": "./PrescribingInformationB.pdf"
+                    "filePath": "isiDocuments/PrescribingInformationB.pdf"
                 }
             ]
         },
@@ -15,11 +15,11 @@
             "name": "Yeervoy",
             "piDocuments": [{
                     "title": "A PI DOc",
-                    "filePath": "./PrescribingInformationA.pdf"
+                    "filePath": "isiDocuments/PrescribingInformationA.pdf"
                 },
                 {
                     "title": "Another PI DOc",
-                    "filePath": "./PrescribingInformationB.pdf"
+                    "filePath": "isiDocuments/PrescribingInformationB.pdf"
                 }
             ]
         }
@@ -27,11 +27,11 @@
 
     "isiDocuments": [{
             "title": "An ISI",
-            "filePath": "./isi.html"
+            "filePath": "isiDocuments/isi.html"
         },
         {
             "title": "Another ISI",
-            "filePath": "./isi2.html"
+            "filePath": "isiDocuments/isi2.html"
         }
     ]
 
