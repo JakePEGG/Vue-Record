@@ -28,9 +28,10 @@
               v-for="(brand, index) in manifest.brands"
               class="brandBtn"
               v-on:click="openPDFs()"
-              img
-              src="public/assets/icons/isitray_files/referenceIcon.png"
-            >{{brand.name}}</button>
+            >
+              <img />
+              {{brand.name}}
+            </button>
           </div>
 
           <div class="safetyInformationHeader">
@@ -76,6 +77,7 @@
 import axios from "axios";
 import RoundButton from "./RoundButton";
 import ida from "../models/ida";
+// import brandButtons from "../components/BrandButtons";
 
 export default {
   name: "SafetyArea",
@@ -214,6 +216,13 @@ export default {
       }
     },
 
+    // insertingIcon() {
+    //   let button = document.querySelectorAll(".brandBtn");
+    //   button.append(
+    //     '<img url("../../public/assets/icons/isitray_files/reficon.png")>'
+    //   );
+    // },
+
     loopSubheading(index, event) {
       const iframe = event.target;
 
@@ -244,16 +253,9 @@ iframe {
   border: none;
 }
 
-/* This is for styling the heading titles. Discuss with MB about arrows */
-/* .subheading-title {
-  border: 3px solid var(--main-color); 
-  color: white;
-  width: 80px;
-} */
-
 .safetyInformationHeader {
   position: absolute;
-  right: 180px;
+  right: 255px;
   font-size: 12px;
   top: 0px;
   display: inline-block;
@@ -272,10 +274,6 @@ div.subheadings * {
   width: 836px;
   background-color: rgba(0, 143, 80, 0.1);
 }
-
-/* .h3 .li .text {
-  opacity: 1;
-} */
 
 .wrapper {
   height: 100%;
@@ -304,22 +302,39 @@ div.subheadings * {
   margin-top: 50px;
 }
 
-.brandButtons.brandBtn.referenceIcon {
-  background-color: red;
-}
-
 .brandBtn {
   position: relative;
   background-color: transparent;
   color: var(--main-color);
   font-family: var(--font-family);
   bottom: 25px;
-  left: 35px;
+  right: 15px;
   font-size: 14px;
   width: 95px;
-  background-color: lightgray;
+  background-color: var(--bms-scroll-bg);
   text-transform: uppercase;
   border-right: 1px solid var(--main-color);
+  background-image: url("../../public/assets/icons/isitray_files/reficon.png");
+  background-repeat: no-repeat;
+  background-position: left;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.brandBtn:nth-child(2) {
+  border-right: none;
+}
+
+/* This is for styling the heading titles. Discuss with MB about arrows */
+.subheading-title {
+  /* border: 1px solid var(--main-color);
+  color: white;
+  width: 80px; */
+
+  /* Need to get a better arrow image */
+  /* background-image: url("../../public/assets/icons/isitray_files/arrowDown.png");
+  background-repeat: no-repeat;
+  background-position: left; */
 }
 
 .label {
@@ -343,6 +358,7 @@ div.subheadings * {
   background-color: rgba(0, 143, 80, 0.1);
   border-right: #454545 solid 1px;
 }
+
 .main-container {
   background-color: transparent;
   background-color: white;
@@ -376,12 +392,15 @@ div.subheadings * {
 
 .Full-Prescribing-Information {
   position: absolute;
-  right: 150px;
+  right: 200px;
   top: 0px;
   width: 200px;
   background: var(--bms-brand-qauaternary-color);
   color: white;
   height: 30px;
+  border-radius: 5px;
+  padding: 10px;
+  text-align: center;
 }
 
 .logo {
@@ -456,6 +475,15 @@ div.subheadings * {
 .minimised .main-container .collapse {
   display: none;
 }
+
+.minimised .logo {
+  top: 40px;
+}
+
+/* .minimised .brandBtn {
+  position: relative;
+  left: -15px;
+} */
 
 .closed .main-container .collapse {
   display: none;
