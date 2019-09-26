@@ -3,9 +3,12 @@
     --bms-brand-font-family: 'arial';
     --bms-brand-main-color: #27649f;
     --bms-brand-secondary-color: #ffffff;
-
+    --bms-brand-tri-color: #dc8633;
+    --bms-brand-qauaternary-color: #008fb4;
     --bms-scroll-bg: #e3e7eb;
     --bms-scroll-thumb: #44484a;
+    --bms-off-color: #aeaeae;
+
     /* 
     MEGA MENU */
     --mega-menu-button-background-color: var(--bms-brand-main-color);
@@ -45,8 +48,22 @@
 }
 
 .isi-html h3 {
-    font-size: 10px;
+    font-size: 20px;
     color: var(--bms-brand-main-color);
+}
+
+/* 
+.isi-html {
+    border-left: #454545 solid 1px
+} */
+
+.isi-html li {
+    color: var(--bms-brand-tri-color);
+}
+
+.isi-html .text {
+    color: #454545;
+    display: inline;
 }
 
 

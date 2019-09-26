@@ -31,7 +31,7 @@
 
 .round-button .close {
   display: none;
-  background-color: var(--button-background-color);
+  background-color: var(--bms-brand-qauaternary-color);
   width: 20px;
   height: 20px;
   top: 6px;
@@ -42,7 +42,7 @@
 }
 
 .disc {
-  background-color: var(--button-background-color);
+  background-color: var(--bms-brand-qauaternary-color);
   color: white;
   width: 33px;
   height: 33px;
@@ -83,7 +83,7 @@
   top: 7px;
   right: 55px;
   text-transform: capitalize;
-  color: var(--main-color);
+  color: var(--bms-brand-qauaternary-color);
   font-size: 16px;
   width: 100%;
   font-size: 16px;
@@ -91,7 +91,7 @@
   margin-right: 5px;
   padding: 0px;
   font-family: var(--font-family);
-  color: var(--button-font-color);
+  /* color: var(--button-font-color); */
 }
 
 /* .label:nth-child(2) {

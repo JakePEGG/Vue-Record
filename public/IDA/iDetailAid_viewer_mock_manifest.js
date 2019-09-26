@@ -58,7 +58,7 @@ window.uk.co.idetailaid.MockManifest = {
       "template_id": null,
       "overlays": [],
       "category": "Safety",
-      "state": "maximised",
+      "state": "minimised",
       "id": 1348,
       "overlays": [{
         "id": "abcdefg",

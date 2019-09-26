@@ -28,6 +28,8 @@
               v-for="(brand, index) in manifest.brands"
               class="brandBtn"
               v-on:click="openPDFs()"
+              img
+              src="public/assets/icons/isitray_files/referenceIcon.png"
             >{{brand.name}}</button>
           </div>
 
@@ -128,7 +130,30 @@ export default {
 
   methods: {
     openPDFs() {
-      window.open("../../public/PrescribingInformationA.pdf");
+      // let brands = this.manifest.brands;
+      // let branded = brands.map(brand => (brand, brands));
+      // console.log(branded);
+
+      // let docName = branded[0];
+      // console.log(branded[0][0].name);
+
+      // let targeta = document.querySelectorAll(".brandBtn");
+
+      // targeta[0] = branded[0][0];
+      // console.log(targeta);
+
+      // let doc = branded.find(doc => doc.title == )
+
+      // let x = brands.forEach(brands, this.manifest.brands);
+      // return manifest.brands;
+      // console.log(x);
+
+      const docName = ida.currentSlide.meta.bms.isi_document;
+      let doc = this.manifest.isiDocuments.find(doc => doc.title == docName);
+
+      window.open(this.basePath + doc.filePath);
+
+      // console.log(this.manifest.brands);
     },
 
     iframeLoaded(index, event) {
@@ -219,6 +244,13 @@ iframe {
   border: none;
 }
 
+/* This is for styling the heading titles. Discuss with MB about arrows */
+/* .subheading-title {
+  border: 3px solid var(--main-color); 
+  color: white;
+  width: 80px;
+} */
+
 .safetyInformationHeader {
   position: absolute;
   right: 180px;
@@ -233,11 +265,18 @@ iframe {
 }
 
 div.subheadings * {
-  margin-bottom: 15px;
+  margin-bottom: 40px;
+  color: var(--bms-brand-qauaternary-color);
 }
 .content {
   width: 836px;
+  background-color: rgba(0, 143, 80, 0.1);
 }
+
+/* .h3 .li .text {
+  opacity: 1;
+} */
+
 .wrapper {
   height: 100%;
 }
@@ -247,6 +286,7 @@ div.subheadings * {
   background-color: white;
   max-height: 1000px;
   transition: max-height 0.35s ease-in;
+  background-color: rgba(0, 143, 80, 0.0001);
 }
 
 .panel.topple {
@@ -264,18 +304,26 @@ div.subheadings * {
   margin-top: 50px;
 }
 
+.brandButtons.brandBtn.referenceIcon {
+  background-color: red;
+}
+
 .brandBtn {
   position: relative;
   background-color: transparent;
   color: var(--main-color);
   font-family: var(--font-family);
-  top: -20px;
-  left: 60px;
-  font-size: 12px;
+  bottom: 25px;
+  left: 35px;
+  font-size: 14px;
+  width: 95px;
+  background-color: lightgray;
   text-transform: uppercase;
-  margin-left: 25px;
-  margin-right: 25px;
-  border: none;
+  border-right: 1px solid var(--main-color);
+}
+
+.label {
+  color: var(--qauaternary-color);
 }
 .brandButtons {
   display: none;
@@ -292,6 +340,8 @@ div.subheadings * {
   width: 184px;
   margin-left: 4px;
   display: inline-block;
+  background-color: rgba(0, 143, 80, 0.1);
+  border-right: #454545 solid 1px;
 }
 .main-container {
   background-color: transparent;
@@ -320,6 +370,7 @@ div.subheadings * {
   left: 9px;
   overflow-y: scroll;
   margin: 2px;
+
   height: 435px;
 }
 
@@ -328,7 +379,7 @@ div.subheadings * {
   right: 150px;
   top: 0px;
   width: 200px;
-  background: var(--main-color);
+  background: var(--bms-brand-qauaternary-color);
   color: white;
   height: 30px;
 }
@@ -395,7 +446,7 @@ div.subheadings * {
 }
 
 .maximised.bg {
-  background-color: blue;
+  background-color: var(--main-color);
 }
 
 .minimised .main-container {
