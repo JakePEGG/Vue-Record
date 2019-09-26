@@ -216,13 +216,6 @@ export default {
       }
     },
 
-    // insertingIcon() {
-    //   let button = document.querySelectorAll(".brandBtn");
-    //   button.append(
-    //     '<img url("../../public/assets/icons/isitray_files/reficon.png")>'
-    //   );
-    // },
-
     loopSubheading(index, event) {
       const iframe = event.target;
 
@@ -326,16 +319,16 @@ div.subheadings * {
 }
 
 /* This is for styling the heading titles. Discuss with MB about arrows */
-.subheading-title {
-  /* border: 1px solid var(--main-color);
+/* .subheading-title { */
+/* border: 1px solid var(--main-color);
   color: white;
   width: 80px; */
 
-  /* Need to get a better arrow image */
-  /* background-image: url("../../public/assets/icons/isitray_files/arrowDown.png");
+/* Need to get a better arrow image */
+/* background-image: url("../../public/assets/icons/isitray_files/arrowDown.png");
   background-repeat: no-repeat;
   background-position: left; */
-}
+/* } */
 
 .label {
   color: var(--qauaternary-color);
@@ -415,6 +408,7 @@ div.subheadings * {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center top;
+  top: 10px;
 }
 /* Class Styles for State */
 
@@ -441,8 +435,8 @@ div.subheadings * {
   background-position: center bottom;
 }
 
-.minised .main-container .logo {
-  top: calc(0 - 100%);
+.minimised .logo {
+  top: 20px;
 }
 
 .closed .main-container {
@@ -474,10 +468,6 @@ div.subheadings * {
 
 .minimised .main-container .collapse {
   display: none;
-}
-
-.minimised .logo {
-  top: 40px;
 }
 
 /* .minimised .brandBtn {

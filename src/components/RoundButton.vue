@@ -39,6 +39,7 @@
 }
 .round-button.active .close {
   display: block;
+  background-color: #f26322;
 }
 
 .disc {
@@ -60,7 +61,7 @@
 .round-button.active .disc {
   color: var(--main-color);
   background-color: white;
-  box-shadow: 0px 0px 20px 0px var(--button-background-color);
+  box-shadow: 0px 0px 20px 0px #f26322;
   transition: background-color 0.2s ease;
   transition: box-shadow 0.2s ease;
 }
