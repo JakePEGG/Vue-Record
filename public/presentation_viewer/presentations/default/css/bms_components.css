@@ -3,7 +3,7 @@
     --bms-brand-font-family: 'arial';
     --bms-brand-main-color: #003b5c;
     --bms-brand-secondary-color: #ffffff;
-    --bms-brand-tri-color: #dc8633;
+    --bms-brand-tri-color: #f26322;
     --bms-brand-qauaternary-color: #008fb4;
     --bms-scroll-bg: #e3e7eb;
     --bms-scroll-thumb: #44484a;
@@ -48,14 +48,10 @@
 }
 
 .isi-html h3 {
-    font-size: 20px;
+    font-size: 17px;
     color: var(--bms-brand-main-color);
 }
 
-/* 
-.isi-html {
-    border-left: #454545 solid 1px
-} */
 
 .isi-html li {
     color: var(--bms-brand-tri-color);

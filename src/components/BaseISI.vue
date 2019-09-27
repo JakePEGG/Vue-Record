@@ -25,6 +25,7 @@
         <div class="buttonBar">
           <div class="brandButtons" v-bind:class="{visible:showBrandButtons}">
             <button
+              ref="brandButton"
               v-for="(brand, index) in manifest.brands"
               class="brandBtn"
               v-on:click="openPDFs()"
@@ -154,6 +155,9 @@ export default {
       let doc = this.manifest.isiDocuments.find(doc => doc.title == docName);
 
       window.open(this.basePath + doc.filePath);
+
+      console.log(this.$refs.brandButton);
+      console.log(event.target);
 
       // console.log(this.manifest.brands);
     },
