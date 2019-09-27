@@ -239,7 +239,7 @@ iframe {
 .filler {
   display: flex;
   flex-grow: 1;
-  background-color: rgba(0, 143, 80, 0.1);
+  background-color: rgba(0, 143, 80, 0.04);
   position: absolute;
   right: 0px;
   width: calc(100% - 1024px);
@@ -259,13 +259,9 @@ iframe {
   font-size: var(--main-font-size);
 }
 
-div.subheadings * {
-  margin-bottom: 32px;
-  color: var(--bms-brand-qauaternary-color);
-}
 .content {
   width: 836px;
-  background-color: rgba(0, 143, 80, 0.1);
+  background-color: rgba(0, 143, 80, 0.04);
 }
 
 .wrapper {
@@ -345,7 +341,7 @@ div.subheadings * {
   width: 184px;
   margin-left: 4px;
   display: inline-block;
-  background-color: rgba(0, 143, 80, 0.1);
+  background-color: rgba(0, 143, 80, 0.04);
   border-right: #454545 solid 1px;
 }
 
@@ -376,6 +372,11 @@ div.subheadings * {
   overflow-y: auto;
   margin: 2px;
   height: 435px;
+}
+
+div.subheadings * {
+  margin-bottom: 32px;
+  color: var(--bms-brand-qauaternary-color);
 }
 
 .Full-Prescribing-Information {
