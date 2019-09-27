@@ -9,7 +9,11 @@
         <div class="logo"></div>
         <div class="subheadings">
           <div v-for="(isiDoc, index) in manifest.isiDocuments">
-            <div class="subheading-title accordian" v-on:click="toggleClass(index)">{{isiDoc.title}}</div>
+            <div
+              v-if="manifest.isiDocuments.length > 1"
+              class="subheading-title accordian"
+              v-on:click="toggleClass(index)"
+            >{{isiDoc.title}}</div>
             <div class="panel" ref="panel">
               <div
                 ref="subheading-buttons"
@@ -22,13 +26,14 @@
       </div>
 
       <div class="content">
+        <div class="filler"></div>
         <div class="buttonBar">
           <div class="brandButtons" v-bind:class="{visible:showBrandButtons}">
             <button
               ref="brandButton"
               v-for="(brand, index) in manifest.brands"
               class="brandBtn"
-              v-on:click="openPDFs()"
+              v-on:click="openPDFs(brand.piDocuments[0].filePath)"
             >
               <img />
               {{brand.name}}
@@ -132,34 +137,16 @@ export default {
   updated() {},
 
   methods: {
-    openPDFs() {
-      // let brands = this.manifest.brands;
-      // let branded = brands.map(brand => (brand, brands));
-      // console.log(branded);
+    openPDFs(filePath) {
+      // let buttonClicked = event.target;
 
-      // let docName = branded[0];
-      // console.log(branded[0][0].name);
+      // const docName = ida.currentSlide.meta.bms.isi_document;
+      // let doc = this.manifest.isiDocuments.find(doc => doc.title == docName);
 
-      // let targeta = document.querySelectorAll(".brandBtn");
+      window.open(this.basePath + filePath);
 
-      // targeta[0] = branded[0][0];
-      // console.log(targeta);
-
-      // let doc = branded.find(doc => doc.title == )
-
-      // let x = brands.forEach(brands, this.manifest.brands);
-      // return manifest.brands;
-      // console.log(x);
-
-      const docName = ida.currentSlide.meta.bms.isi_document;
-      let doc = this.manifest.isiDocuments.find(doc => doc.title == docName);
-
-      window.open(this.basePath + doc.filePath);
-
-      console.log(this.$refs.brandButton);
-      console.log(event.target);
-
-      // console.log(this.manifest.brands);
+      // console.log(filePath);
+      // console.log(buttonClicked.dataset.file);
     },
 
     iframeLoaded(index, event) {
@@ -212,8 +199,7 @@ export default {
     brandCheck() {
       let brands = this.manifest.brands;
       if (brands.length == 1) {
-        return;
-        this.manifest.brands[0].piDocuments[0].filePath;
+        this.openPDFs(this.manifest.brands[0].piDocuments[0].filePath);
       }
       if (brands.length > 1) {
         this.showBrands();
@@ -244,10 +230,20 @@ iframe {
   width: 100%;
   overflow-y: visible;
   height: 560px;
-  font-family: var(--main-font);
+  font-family: var(--font-family);
   color: var(--main-color);
   display: none;
   border: none;
+}
+
+.filler {
+  display: flex;
+  flex-grow: 1;
+  background-color: rgba(0, 143, 80, 0.1);
+  position: absolute;
+  right: 0px;
+  width: calc(100% - 1024px);
+  height: 3000px;
 }
 
 .safetyInformationHeader {
@@ -259,12 +255,12 @@ iframe {
   width: 600px;
   margin-bottom: 20px;
   color: var(--main-color);
-  font-family: var(--main-font);
+  font-family: var(--font-family);
   font-size: var(--main-font-size);
 }
 
 div.subheadings * {
-  margin-bottom: 40px;
+  margin-bottom: 32px;
   color: var(--bms-brand-qauaternary-color);
 }
 .content {
@@ -310,35 +306,32 @@ div.subheadings * {
   width: 95px;
   background-color: var(--bms-scroll-bg);
   text-transform: uppercase;
-  border-right: 1px solid var(--main-color);
+  border-right: 3px solid var(---bms-brand-qauaternary-color);
   background-image: url("../../public/assets/icons/isitray_files/reficon.png");
   background-repeat: no-repeat;
   background-position: left;
-  border-radius: 5px;
+  border-top-left-radius: 5px;
   padding: 5px;
+  border-right: 0px;
+  padding-right: 0px;
 }
 
 .brandBtn:nth-child(2) {
   border-right: none;
+  border-right: 5px;
+  padding-right: 5px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 0px;
+  /* margin-left: */
 }
-
-/* This is for styling the heading titles. Discuss with MB about arrows */
-/* .subheading-title { */
-/* border: 1px solid var(--main-color);
-  color: white;
-  width: 80px; */
-
-/* Need to get a better arrow image */
-/* background-image: url("../../public/assets/icons/isitray_files/arrowDown.png");
-  background-repeat: no-repeat;
-  background-position: left; */
-/* } */
 
 .label {
   color: var(--qauaternary-color);
 }
 .brandButtons {
-  display: none;
+  /* display: none; */
+  opacity: 0;
+  transition: opacity 0.5s ease;
   position: relative;
   right: 190px;
   background-color: transparent;
@@ -357,8 +350,7 @@ div.subheadings * {
 }
 
 .main-container {
-  background-color: transparent;
-  background-color: white;
+  background-color: #f7fcff;
   color: darkblue;
   border-color: darkblue;
   border-left: 1px solid;
@@ -378,12 +370,11 @@ div.subheadings * {
   position: relative;
   font-family: var(--font-family);
   display: block;
-  width: 130px;
+  width: 140px;
   display: block;
   left: 9px;
-  overflow-y: scroll;
+  overflow-y: auto;
   margin: 2px;
-
   height: 435px;
 }
 
@@ -489,5 +480,6 @@ div.subheadings * {
 
 .visible {
   display: unset;
+  opacity: 1;
 }
 </style>
