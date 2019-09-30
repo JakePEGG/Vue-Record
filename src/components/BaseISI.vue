@@ -29,15 +29,15 @@
         <div class="filler"></div>
         <div class="buttonBar">
           <div class="brandButtons" v-bind:class="{visible:showBrandButtons}">
-            <button
+            <div
               ref="brandButton"
               v-for="(brand, index) in manifest.brands"
               class="brandBtn"
               v-on:click="openPDFs(brand.piDocuments[0].filePath)"
             >
-              <img />
-              {{brand.name}}
-            </button>
+              <img src="assets/icons/isitray_files/reficon.png" />
+              <span>{{brand.name}}</span>
+            </div>
           </div>
 
           <div class="safetyInformationHeader">
@@ -292,23 +292,22 @@ iframe {
 }
 
 .brandBtn {
+  display: inline-block;
   position: relative;
   background-color: transparent;
-  color: var(--main-color);
+  color: var(--bms-brand-qauaternary-color);
   font-family: var(--font-family);
   bottom: 25px;
-  right: 15px;
+  right: 11px;
   font-size: 14px;
-  width: 95px;
+  width: 93px;
   background-color: var(--bms-scroll-bg);
   text-transform: uppercase;
-  border-right: 3px solid var(---bms-brand-qauaternary-color);
-  background-image: url("../../public/assets/icons/isitray_files/reficon.png");
-  background-repeat: no-repeat;
-  background-position: left;
+  border-right: 1px solid var(--bms-brand-qauaternary-color);
   border-top-left-radius: 5px;
-  padding: 5px;
-  border-right: 0px;
+  padding: 3px;
+  padding-bottom: 7px;
+  /* border-right: 0px; */
   padding-right: 0px;
 }
 
@@ -318,7 +317,17 @@ iframe {
   padding-right: 5px;
   border-top-right-radius: 5px;
   border-top-left-radius: 0px;
+  /* border-left: 3px solid var(---bms-brand-qauaternary-color); */
   /* margin-left: */
+}
+
+.brandBtn img {
+  margin-right: 5px;
+  /* padding-left: 5px */
+}
+
+.brandBtn:nth-child(1) img {
+  margin-left: 10px;
 }
 
 .label {
