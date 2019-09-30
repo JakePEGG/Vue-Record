@@ -239,7 +239,7 @@ iframe {
 .filler {
   display: flex;
   flex-grow: 1;
-  background-color: rgba(0, 143, 80, 0.04);
+  background-color: rgba(0, 143, 80, 0.03);
   position: absolute;
   right: 0px;
   width: calc(100% - 1024px);
@@ -248,7 +248,7 @@ iframe {
 
 .safetyInformationHeader {
   position: absolute;
-  right: 255px;
+  right: 215px;
   font-size: 12px;
   top: 0px;
   display: inline-block;
@@ -274,6 +274,7 @@ iframe {
   max-height: 1000px;
   transition: max-height 0.35s ease-in;
   background-color: rgba(0, 143, 80, 0.0001);
+  margin-right: 10px;
 }
 
 .panel.topple {
@@ -386,6 +387,7 @@ iframe {
 div.subheadings * {
   margin-bottom: 32px;
   color: var(--bms-brand-qauaternary-color);
+  margin-right: 2px;
 }
 
 .Full-Prescribing-Information {
@@ -419,15 +421,15 @@ div.subheadings * {
 
 .expand {
   position: absolute;
-  right: 0px;
-  top: 10px;
+  left: 160px;
+  top: 20px;
   font-size: 16px;
 }
 
 .collapse {
   position: absolute;
-  right: 0px;
-  top: 10px;
+  left: 160px;
+  top: 20px;
   font-size: 16px;
 }
 

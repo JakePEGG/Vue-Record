@@ -12,41 +12,11 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.round-button {
-  width: 60px;
-  transition: opacity 0.2s ease;
-}
-
-.round-button img {
-  width: 16px;
-  height: 16px;
-  top: -1px;
-  left: 8px;
-  position: relative;
-}
-
-.round-button.active .icon {
-  display: none;
-}
-
-.round-button .close {
-  display: none;
-  background-color: var(--bms-brand-qauaternary-color);
-  width: 20px;
-  height: 20px;
-  top: 6px;
-  left: 0px;
-}
-.round-button.active .close {
-  display: block;
-  background-color: #f26322;
-}
-
 .disc {
   background-color: var(--bms-brand-qauaternary-color);
   color: white;
-  width: 33px;
-  height: 33px;
+  width: 23px;
+  height: 23px;
   border-radius: 100%;
   margin: auto;
   line-height: 33px;
@@ -56,6 +26,36 @@
 .disc .icon {
   margin: auto;
   vertical-align: middle;
+}
+.round-button {
+  width: 60px;
+  top: 20px;
+  transition: opacity 0.2s ease;
+}
+
+.round-button img {
+  width: 20px;
+  height: 20px;
+  bottom: 5px;
+  left: 2px;
+  position: relative;
+}
+
+.round-button.active .icon {
+  display: none;
+}
+
+.round-button .close {
+  display: none;
+  background-color: #f26322;
+  width: 20px;
+  height: 20px;
+  top: 2px;
+  left: 0.45px;
+}
+.round-button.active .close {
+  display: block;
+  background-color: transparent;
 }
 
 .round-button.active .disc {
@@ -81,9 +81,10 @@
 
 .label {
   position: absolute;
-  top: 7px;
-  right: 55px;
-  text-transform: capitalize;
+  top: 4px;
+  right: 52px;
+  text-transform: uppercase;
+  font-style: bold;
   color: var(--bms-brand-qauaternary-color);
   font-size: 16px;
   width: 100%;
