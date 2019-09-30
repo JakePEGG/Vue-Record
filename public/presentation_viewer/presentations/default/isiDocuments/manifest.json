@@ -1,0 +1,32 @@
+{
+    "brands": [
+        {
+            "name": "Opdivo",
+            "piDocuments": [
+                {
+                    "title": "A PI DOc",
+                    "filePath": "isiDocuments/PrescribingInformationA.pdf"
+                }
+            ]
+        },
+        {
+            "name": "Yeervoy",
+            "piDocuments": [
+                {
+                    "title": "A PI DOc",
+                    "filePath": "isiDocuments/PrescribingInformationB.pdf"
+                }
+            ]
+        }
+    ],
+    "isiDocuments": [
+        {
+            "title": "An ISI",
+            "filePath": "isiDocuments/isi.html"
+        },
+        {
+            "title": "Another ISI",
+            "filePath": "isiDocuments/isi2.html"
+        }
+    ]
+}
