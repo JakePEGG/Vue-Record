@@ -138,15 +138,7 @@ export default {
 
   methods: {
     openPDFs(filePath) {
-      // let buttonClicked = event.target;
-
-      // const docName = ida.currentSlide.meta.bms.isi_document;
-      // let doc = this.manifest.isiDocuments.find(doc => doc.title == docName);
-
       window.open(this.basePath + filePath);
-
-      // console.log(filePath);
-      // console.log(buttonClicked.dataset.file);
     },
 
     iframeLoaded(index, event) {
@@ -223,7 +215,7 @@ export default {
   }
 };
 </script>
-
+ 
 <style scoped>
 /* General Styles */
 iframe {
