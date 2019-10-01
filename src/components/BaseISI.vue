@@ -103,15 +103,25 @@ export default {
       .then(response => {
         this.manifest = response.data;
 
-        this.currentISI = this.manifest.isiDocuments[0].filePath;
-
+        // if (!this.manifest.isiDocuments[0]) {
+        //   this.closedState = "closed";
+        // } else {
         if (!ida.currentSlide.meta.bms.isi_section) {
           this.closedState = "closed";
         } else {
           this.closedState = "minimised";
         }
         this.state = this.closedState;
+
+        this.currentISI = this.manifest.isiDocuments[0].filePath;
       });
+
+    // }
+
+    // this.$nextTick(() => {
+
+    // });
+    // this.$forceUpdate();
   },
 
   components: {
