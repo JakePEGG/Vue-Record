@@ -299,9 +299,9 @@ iframe {
   color: var(--bms-brand-qauaternary-color);
   font-family: var(--font-family);
   bottom: 25px;
-  right: 11px;
-  font-size: 14px;
-  width: 93px;
+  left: 35px;
+  font-size: 16px;
+  width: 105px;
   background-color: var(--bms-scroll-bg);
   text-transform: uppercase;
   border-right: 1px solid var(--bms-brand-qauaternary-color);
@@ -392,15 +392,18 @@ div.subheadings * {
 
 .Full-Prescribing-Information {
   position: absolute;
-  right: 200px;
+  right: 150px;
   top: 0px;
-  width: 200px;
+  height: 50px;
+  width: 230px;
   background: var(--bms-brand-qauaternary-color);
   color: white;
   height: 30px;
+  font-size: 14px;
   border-radius: 5px;
   padding: 10px;
   text-align: center;
+  vertical-align: middle;
 }
 
 .logo {
@@ -421,14 +424,14 @@ div.subheadings * {
 
 .expand {
   position: absolute;
-  left: 160px;
+  left: 190px;
   top: 20px;
   font-size: 16px;
 }
 
 .collapse {
   position: absolute;
-  left: 160px;
+  left: 190px;
   top: 20px;
   font-size: 16px;
 }
@@ -460,7 +463,7 @@ div.subheadings * {
 
 .bg {
   background-color: transparent;
-  transition: background-color 0.5s ease;
+  transition: background-color 0.3s ease;
   width: 100%;
   height: 100%;
 }

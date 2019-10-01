@@ -48,9 +48,9 @@
 .round-button .close {
   display: none;
   background-color: #f26322;
-  width: 20px;
-  height: 20px;
-  top: 2px;
+  width: 16px;
+  height: 16px;
+  top: 4px;
   left: 0.45px;
 }
 .round-button.active .close {
@@ -82,7 +82,7 @@
 .label {
   position: absolute;
   top: 4px;
-  right: 52px;
+  right: 50px;
   text-transform: uppercase;
   font-style: bold;
   color: var(--bms-brand-qauaternary-color);
