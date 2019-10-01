@@ -300,7 +300,7 @@ iframe {
   font-family: var(--font-family);
   bottom: 25px;
   left: 35px;
-  font-size: 16px;
+  font-size: 14px;
   width: 105px;
   background-color: var(--bms-scroll-bg);
   text-transform: uppercase;
@@ -343,7 +343,7 @@ iframe {
   background-color: transparent;
   color: var(--main-color);
   padding-bottom: 20px;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .sidebar {
