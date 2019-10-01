@@ -121,7 +121,7 @@ export default {
   data() {
     return {
       labels: [],
-      closedState: "",
+      closedState: "closed",
       state: "",
       animate: false,
       showBrandButtons: false,
@@ -299,9 +299,9 @@ iframe {
   color: var(--bms-brand-qauaternary-color);
   font-family: var(--font-family);
   bottom: 25px;
-  left: 35px;
+  left: 39px;
   font-size: 14px;
-  width: 105px;
+  width: 108px;
   background-color: var(--bms-scroll-bg);
   text-transform: uppercase;
   border-right: 1px solid var(--bms-brand-qauaternary-color);
@@ -441,7 +441,7 @@ div.subheadings * {
 }
 
 .closed .main-container .logo {
-  bottom: 80px;
+  top: -100px;
   background-position: center bottom;
 }
 
@@ -471,6 +471,10 @@ div.subheadings * {
 .maximised.bg {
   background-color: var(--main-color);
 }
+
+/* .closed .bg .logo {
+  top: -100px;
+} */
 
 .minimised .main-container {
   top: calc(100% - 120px);
