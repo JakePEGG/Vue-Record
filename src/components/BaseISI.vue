@@ -343,7 +343,7 @@ iframe {
   background-color: transparent;
   color: var(--main-color);
   padding-bottom: 20px;
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .sidebar {
@@ -399,7 +399,7 @@ div.subheadings * {
   background: var(--bms-brand-qauaternary-color);
   color: white;
   height: 30px;
-  font-size: 14px;
+  font-size: 16px;
   border-radius: 5px;
   padding: 5px;
   text-align: center;
