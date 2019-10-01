@@ -416,14 +416,14 @@ div.subheadings * {
 
 .expand {
   position: absolute;
-  left: 190px;
+  left: 195px;
   top: 20px;
   font-size: 16px;
 }
 
 .collapse {
   position: absolute;
-  left: 190px;
+  left: 195px;
   top: 20px;
   font-size: 16px;
 }
