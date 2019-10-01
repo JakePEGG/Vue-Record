@@ -100,7 +100,7 @@
   right: 70px;
 } */
 .round-button.active.collapse .label {
-  right: 75px;
+  right: 70px;
 }
 .round-button.disabled .label {
   color: var(--button-disabled-font-color);

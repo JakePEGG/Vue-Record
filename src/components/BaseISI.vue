@@ -401,7 +401,7 @@ div.subheadings * {
   height: 30px;
   font-size: 14px;
   border-radius: 5px;
-  padding: 10px;
+  padding: 5px;
   text-align: center;
   vertical-align: middle;
 }
