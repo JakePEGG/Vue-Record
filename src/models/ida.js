@@ -16,6 +16,8 @@ export default {
         return presentation.data.briefcase;
     },
 
+
+
     isNotBriefcase(presentation) {
         return !presentation.data.briefcase;
     },

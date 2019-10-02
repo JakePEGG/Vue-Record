@@ -83,7 +83,6 @@
 import axios from "axios";
 import RoundButton from "./RoundButton";
 import ida from "../models/ida";
-// import brandButtons from "../components/BrandButtons";
 
 export default {
   name: "SafetyArea",
@@ -106,14 +105,20 @@ export default {
         // if (!this.manifest.isiDocuments[0]) {
         //   this.closedState = "closed";
         // } else {
-        if (!ida.currentSlide.meta.bms.isi_section) {
-          this.closedState = "closed";
-        } else {
-          this.closedState = "minimised";
-        }
-        this.state = this.closedState;
 
         this.currentISI = this.manifest.isiDocuments[0].filePath;
+
+        try {
+          if (ida.currentSlide.meta.bms_isi.isi_section) {
+            this.closedState = "minimised";
+          } else {
+            this.closedState = "closed";
+          }
+        } catch (error) {
+          this.closedState = "closed";
+        }
+
+        this.state = this.closedState;
       });
 
     // }
@@ -131,7 +136,7 @@ export default {
   data() {
     return {
       labels: [],
-      closedState: "closed",
+      closedState: "",
       state: "",
       animate: false,
       showBrandButtons: false,
@@ -162,8 +167,8 @@ export default {
     },
 
     showDefaultSection() {
-      const docName = ida.currentSlide.meta.bms.isi_document;
-      const section = ida.currentSlide.meta.bms.isi_section;
+      const docName = ida.currentSlide.meta.bms_isi.isi_document;
+      const section = ida.currentSlide.meta.bms_isi.isi_section;
 
       if (section) {
         let doc = this.manifest.isiDocuments.find(doc => doc.title == docName);
@@ -224,6 +229,12 @@ export default {
     }
   }
 };
+
+//      If the second ISI Document is required in JSON
+// {
+//     "title": "Another ISI",
+//     "filePath": "isiDocuments/isi2.html"
+// }
 </script>
  
 <style scoped>
@@ -310,7 +321,6 @@ iframe {
   border-top-left-radius: 5px;
   padding: 3px;
   padding-bottom: 7px;
-  /* border-right: 0px; */
   padding-right: 0px;
 }
 
@@ -320,8 +330,6 @@ iframe {
   padding-right: 5px;
   border-top-right-radius: 5px;
   border-top-left-radius: 0px;
-  /* border-left: 3px solid var(---bms-brand-qauaternary-color); */
-  /* margin-left: */
 }
 
 .brandBtn img {
@@ -474,10 +482,6 @@ div.subheadings * {
   background-color: var(--main-color);
 }
 
-/* .closed .bg .logo {
-  top: -100px;
-} */
-
 .minimised .main-container {
   top: calc(100% - 120px);
 }
@@ -485,11 +489,6 @@ div.subheadings * {
 .minimised .main-container .collapse {
   display: none;
 }
-
-/* .minimised .brandBtn {
-  position: relative;
-  left: -15px;
-} */
 
 .closed .main-container .collapse {
   display: none;

@@ -50,7 +50,7 @@ window.uk.co.idetailaid.MockManifest = {
       "mandatory": 0,
       "reference_ids": [],
       "meta": {
-        "bms": {
+        "bms_isi": {
           "isi_document": "An ISI",
           "isi_section": "Subhead 1",
         }
