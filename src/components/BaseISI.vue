@@ -149,7 +149,15 @@ export default {
     };
   },
 
-  updated() {},
+  watch: {
+    state(val, oldVal) {
+      if (val == "maximised") {
+        window.ida.Viewer.api.bringToFront(window.frameElement);
+      } else {
+        window.ida.Viewer.api.resetZIndex(window.frameElement);
+      }
+    }
+  },
 
   methods: {
     openPDFs(filePath) {

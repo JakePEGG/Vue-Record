@@ -135,6 +135,15 @@ getSwipe: (...args) => {
 render: (...args) => { 
   console.debug('Viewer.api.render called with:', args);
 },
+bringToFront: (...args) => { 
+  console.debug('Viewer.api.bringToFront called with:', args);
+},
+sendToBack: (...args) => { 
+  console.debug('Viewer.api.sendToBack called with:', args);
+},
+resetZIndex: (...args) => { 
+  console.debug('Viewer.api.resetZIndex called with:', args);
+},
 goToSlide: (...args) => { 
   console.debug('Viewer.api.goToSlide called with:', args);
 },
