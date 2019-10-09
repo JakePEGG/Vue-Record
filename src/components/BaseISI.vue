@@ -89,14 +89,24 @@ export default {
   beforeCreate() {
     this.basePath = "../shared/presentation_viewer/presentations/default/";
 
-    // TODO : this path needs to be adjusted when we are in veeva to be
-    // ../shared/presentations/default/isiDocuments/manifest.json
     axios
       .get(this.basePath + "isiDocuments/manifest.json")
 
       .catch(error => {
+        console.log(
+          "Failed to load",
+          this.bathPath + "isiDocuments/manifest.json"
+        );
         this.basePath = "../presentation_viewer/presentations/default/";
+        console.log("trying", this.basePath + "isiDocuments/manifest.json");
         return axios.get(this.basePath + "isiDocuments/manifest.json");
+      })
+      .catch(error => {
+        console.log(
+          "Failed to load",
+          this.bathPath + "isiDocuments/manifest.json",
+          error
+        );
       })
 
       .then(response => {
